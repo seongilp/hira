@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>히라가나 7일 — 원고용지</title>
+<title>가나 7일 — 원고용지</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -13,14 +13,19 @@
   --paper-2:#F8F8F3;
   --ink:#1A1B1D;
   --ink-soft:#5C5F5A;
-  --grid:#2F5D50;
-  --grid-line:rgba(47,93,80,.30);
-  --grid-line-hard:rgba(47,93,80,.55);
   --red:#C4402E;
   --serif:"Shippori Mincho",'Yu Mincho','YuMincho',serif;
   --sans:"IBM Plex Sans KR",-apple-system,'Malgun Gothic',sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,monospace;
+  /* 기본 = 둘 다 */
+  --grid:#3C4F58;
+  --grid-line:rgba(60,79,88,.30);
+  --grid-line-hard:rgba(60,79,88,.55);
+  --grid-dark:#2E3D44;
 }
+body.m-h{ --grid:#2F5D50; --grid-line:rgba(47,93,80,.30); --grid-line-hard:rgba(47,93,80,.55); --grid-dark:#26493F; }
+body.m-k{ --grid:#2F4A6D; --grid-line:rgba(47,74,109,.30); --grid-line-hard:rgba(47,74,109,.55); --grid-dark:#243955; }
+
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
@@ -65,10 +70,28 @@ h1{
   margin:14px 0 0;
 }
 h1 .jp{display:block;font-size:.52em;color:var(--grid);letter-spacing:.06em;margin-top:6px}
-.lede{position:relative;max-width:46ch;margin:22px 0 0;color:var(--ink-soft);font-size:15.5px}
+.lede{position:relative;max-width:48ch;margin:22px 0 0;color:var(--ink-soft);font-size:15.5px}
+.lede b{color:var(--ink);font-weight:500}
+
+/* ── 문자 전환 ───────────────────── */
+.modebar{
+  position:relative;display:flex;gap:0;margin:30px 0 0;
+  border:1px solid var(--grid-line-hard);border-radius:2px;overflow:hidden;max-width:430px;background:var(--paper-2);
+}
+.mode{
+  flex:1;background:transparent;border:0;border-right:1px solid var(--grid-line);
+  padding:11px 6px;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  color:var(--ink-soft);transition:background .15s,color .15s;
+}
+.mode:last-child{border-right:0}
+.mode b{display:block;font-family:var(--serif);font-size:16px;font-weight:700;margin-top:2px;letter-spacing:.08em}
+.mode:hover{background:rgba(0,0,0,.04)}
+.mode[aria-pressed="true"]{background:var(--grid);color:var(--paper-2)}
+.mode:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
 
 /* ── 섹션 ───────────────────── */
 section{margin:0 0 64px}
+section[hidden]{display:none}
 h2{
   font-family:var(--serif);font-weight:700;font-size:24px;
   margin:0 0 6px;display:flex;align-items:baseline;gap:12px;
@@ -85,7 +108,7 @@ h2 .num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--red);
   color:var(--ink-soft);letter-spacing:.06em;transition:background .15s,color .15s;
 }
 .tab:last-child{border-right:0}
-.tab:hover{background:rgba(47,93,80,.07)}
+.tab:hover{background:rgba(0,0,0,.04)}
 .tab[aria-selected="true"]{background:var(--grid);color:var(--paper-2)}
 .tab b{display:block;font-family:var(--serif);font-size:17px;font-weight:700;margin-top:2px}
 .tab:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
@@ -108,8 +131,7 @@ h2 .num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--red);
   margin:26px 0 10px;display:flex;align-items:center;gap:10px;
 }
 .rowlabel::after{content:"";flex:1;height:1px;background:var(--grid-line)}
-.cells{display:grid;grid-template-columns:repeat(5,1fr);gap:-1px;border-collapse:collapse}
-.cells{gap:0;border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard)}
+.cells{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard)}
 .cell{
   border-right:1px solid var(--grid-line-hard);
   border-bottom:1px solid var(--grid-line-hard);
@@ -119,20 +141,37 @@ h2 .num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--red);
 }
 .cell::before{ /* 원고용지 십자 보조선 */
   content:"";position:absolute;left:10%;right:10%;top:34%;
-  border-top:1px dashed rgba(47,93,80,.22);pointer-events:none;
+  border-top:1px dashed var(--grid-line);pointer-events:none;
 }
-.kana{font-family:var(--serif);font-weight:500;font-size:44px;line-height:1;color:var(--ink);margin-top:2px}
+.glyphrow{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-top:2px}
+.glyphrow .sep{font-size:20px;color:var(--grid-line-hard);font-weight:300}
+.kana{font-family:var(--serif);font-weight:500;font-size:44px;line-height:1;color:var(--ink)}
+.cells.duo .kana{font-size:36px}
 .kr{font-size:15px;font-weight:500;margin-top:9px}
 .rom{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--grid);text-transform:uppercase}
-.hint{font-size:11.5px;line-height:1.45;color:var(--ink-soft);margin-top:7px}
+.hint{font-size:11.5px;line-height:1.45;color:var(--ink-soft);margin-top:7px;text-align:center}
+.hint .b{
+  display:inline-block;font-family:var(--serif);font-size:11px;
+  color:var(--grid);border:1px solid var(--grid-line);border-radius:2px;
+  padding:0 3px;margin-right:4px;line-height:1.5;
+}
+.hint + .hint{margin-top:4px}
 .cell.warn .kana{color:var(--red)}
+.tagonly{
+  position:absolute;top:5px;right:6px;font-family:var(--mono);font-size:8.5px;
+  letter-spacing:.1em;color:var(--grid);opacity:.6;
+}
 
 /* ── 헷갈리는 짝 ───────────────────── */
 .pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:1px;background:var(--grid-line-hard);border:1px solid var(--grid-line-hard)}
-.pair{background:var(--paper-2);padding:16px 17px}
+.pair{background:var(--paper-2);padding:16px 17px;position:relative}
 .pair .glyphs{font-family:var(--serif);font-size:34px;font-weight:500;letter-spacing:.1em;line-height:1.2}
 .pair .glyphs em{font-style:normal;color:var(--red)}
 .pair p{margin:7px 0 0;font-size:12.8px;line-height:1.55;color:var(--ink-soft)}
+.pair .s{
+  position:absolute;top:12px;right:14px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.12em;color:var(--grid);opacity:.6;
+}
 
 /* ── 발음 노트 ───────────────────── */
 .notes{border-top:1px solid var(--grid-line-hard)}
@@ -140,6 +179,13 @@ h2 .num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--red);
 .note .g{font-family:var(--serif);font-size:26px;font-weight:500;line-height:1.1;color:var(--grid)}
 .note p{margin:0;font-size:13.6px;color:var(--ink-soft)}
 .note p b{color:var(--ink);font-weight:500}
+
+/* ── 단어 ───────────────────── */
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;background:var(--grid-line-hard);border:1px solid var(--grid-line-hard)}
+.word{background:var(--paper-2);padding:14px 16px}
+.word .w{font-family:var(--serif);font-size:23px;font-weight:500;letter-spacing:.04em}
+.word .m{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+.word .m b{color:var(--ink);font-weight:500}
 
 /* ── 퀴즈 ───────────────────── */
 .quiz{border:1px solid var(--grid-line-hard);background:var(--paper-2)}
@@ -149,7 +195,7 @@ h2 .num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--red);
   padding:6px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
   color:var(--ink-soft);cursor:pointer;transition:.15s;
 }
-.chip:hover{background:rgba(47,93,80,.07)}
+.chip:hover{background:rgba(0,0,0,.04)}
 .chip[aria-pressed="true"]{background:var(--grid);border-color:var(--grid);color:var(--paper-2)}
 .chip:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 
@@ -160,25 +206,40 @@ h2 .num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--red);
   display:flex;align-items:center;justify-content:center;
 }
 .square::before,.square::after{content:"";position:absolute;background:none;pointer-events:none}
-.square::before{left:0;right:0;top:50%;border-top:1px dashed rgba(47,93,80,.25)}
-.square::after{top:0;bottom:0;left:50%;border-left:1px dashed rgba(47,93,80,.25)}
+.square::before{left:0;right:0;top:50%;border-top:1px dashed var(--grid-line)}
+.square::after{top:0;bottom:0;left:50%;border-left:1px dashed var(--grid-line)}
 #qKana{font-family:var(--serif);font-weight:500;font-size:92px;line-height:1;position:relative;z-index:1}
+#qTag{
+  position:absolute;bottom:7px;left:0;right:0;z-index:1;
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--grid);opacity:.55;
+}
 #mark{position:absolute;inset:0;z-index:2;pointer-events:none}
 #mark path,#mark circle{fill:none;stroke:var(--red);stroke-width:5;stroke-linecap:round;opacity:.9}
 
-.answer{margin:26px auto 0;max-width:320px;display:flex;gap:8px}
-#qIn{
-  flex:1;background:transparent;border:0;border-bottom:1.5px solid var(--grid-line-hard);
-  font-family:var(--mono);font-size:22px;text-align:center;letter-spacing:.12em;
-  padding:8px 4px;color:var(--ink);outline:none;
+.choices{
+  margin:28px auto 0;max-width:430px;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--grid-line-hard);border:1px solid var(--grid-line-hard);
 }
-#qIn:focus{border-bottom-color:var(--red)}
-#qIn::placeholder{color:rgba(92,95,90,.4);letter-spacing:.1em;font-size:15px}
-.go{
-  background:var(--grid);color:var(--paper-2);border:0;border-radius:2px;
-  padding:0 18px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;cursor:pointer;
+.choice{
+  background:var(--paper-2);border:0;padding:14px 8px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  transition:background .12s,color .12s;position:relative;
 }
-.go:hover{background:#26493F}
+.choice .cr{font-family:var(--mono);font-size:19px;letter-spacing:.1em;color:var(--ink);text-transform:lowercase}
+.choice .ck{font-size:12px;color:var(--ink-soft)}
+.choice .cn{
+  position:absolute;top:5px;left:7px;font-family:var(--mono);font-size:9px;
+  color:var(--grid);opacity:.45;letter-spacing:.05em;
+}
+.choice:hover:not(:disabled){background:rgba(0,0,0,.045)}
+.choice:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+.choice:disabled{cursor:default}
+.choice.ok{background:var(--grid)}
+.choice.ok .cr,.choice.ok .ck,.choice.ok .cn{color:var(--paper-2);opacity:1}
+.choice.no{background:rgba(196,64,46,.12)}
+.choice.no .cr{color:var(--red);text-decoration:line-through}
+.choice.dim{opacity:.4}
 .verdict{min-height:26px;margin:16px 0 0;font-size:14px;font-family:var(--mono);letter-spacing:.04em}
 .verdict.ok{color:var(--grid)}
 .verdict.no{color:var(--red)}
@@ -197,61 +258,64 @@ td.d{font-family:var(--serif);font-weight:700;white-space:nowrap}
 td.r{color:var(--ink-soft)}
 
 footer{border-top:1px solid var(--grid-line-hard);padding-top:22px;font-size:12.5px;color:var(--ink-soft)}
+footer b{color:var(--ink);font-weight:500}
 
 @media (max-width:640px){
   .cells{grid-template-columns:repeat(3,1fr)}
   .cell{min-height:118px;padding:12px 6px 10px}
   .kana{font-size:38px}
+  .cells.duo .kana{font-size:30px}
+  .glyphrow{gap:6px}
   .hint{display:none}
   .note{grid-template-columns:56px 1fr;gap:12px}
   .square{width:140px;height:140px}
   #qKana{font-size:76px}
+  .modebar{max-width:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body>
+<body class="m-b">
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">7-day plan · 46 characters</div>
-  <h1>히라가나 일주일<span class="jp">ひらがな 七日</span></h1>
-  <p class="lede">보고 알아보는 건 외운 게 아닙니다. 매일 새 5자를 채우고, 어제 것을 백지에서 꺼내세요. 하루 20분이면 충분합니다.</p>
+  <div class="eyebrow">7-day plan · 46 + 46 characters</div>
+  <h1>가나 일주일<span class="jp">かな・カナ 七日</span></h1>
+  <p class="lede">히라가나와 가타카나는 <b>같은 46개의 소리</b>를 적는 두 벌의 옷입니다. 따로 배우면 두 배 걸리고, 같은 행을 나란히 배우면 한 번에 끝납니다. 매일 새 한 줄을 채우고, 어제 것을 백지에서 꺼내세요.</p>
+  <div class="modebar" id="modebar" role="group" aria-label="문자 선택"></div>
 </header>
 
 <section>
   <h2><span class="num">01</span>7일 진도표</h2>
-  <p class="sub">날짜를 눌러 그날 분량을 확인하세요.</p>
+  <p class="sub" id="sub01"></p>
   <div class="tabs" role="tablist" id="tabs"></div>
   <div id="dayPanel" role="tabpanel"></div>
 </section>
 
 <section>
   <h2><span class="num">02</span>헷갈리는 짝</h2>
-  <p class="sub">고생의 90%는 이 여섯 쌍에서 나옵니다. 따로 외우면 계속 섞이니, 반드시 나란히 놓고 차이 한 가지만 잡으세요.</p>
+  <p class="sub">고생의 90%는 여기서 나옵니다. 따로 외우면 계속 섞이니, 반드시 나란히 놓고 차이 한 가지만 잡으세요.</p>
   <div class="pairs" id="pairs"></div>
 </section>
 
 <section>
-  <h2><span class="num">03</span>한국어 화자가 놓치는 발음</h2>
-  <p class="sub">글자는 맞게 읽어도 소리가 틀리는 지점입니다. 처음부터 잡아두는 게 훨씬 쌉니다.</p>
+  <h2><span class="num">03</span>소리와 규칙</h2>
+  <p class="sub">글자는 맞게 읽어도 소리가 틀리는 지점, 그리고 문자별로만 적용되는 규칙입니다.</p>
   <div class="notes" id="notes"></div>
 </section>
 
 <section>
   <h2><span class="num">04</span>꺼내기 연습</h2>
-  <p class="sub">글자를 보고 로마자를 직접 입력하세요. 틀린 글자는 뒤쪽에 다시 섞여 들어옵니다.</p>
+  <p class="sub">글자를 보고 맞는 로마자를 고르세요. 키보드 <b>1~4</b>로도 됩니다. 틀린 글자는 뒤쪽에 다시 섞여 들어옵니다.</p>
   <div class="quiz">
     <div class="quizbar" id="quizbar"></div>
     <div class="stage">
       <div class="square">
         <span id="qKana">あ</span>
+        <span id="qTag"></span>
         <svg id="mark" viewBox="0 0 170 170" aria-hidden="true"></svg>
       </div>
-      <div class="answer">
-        <input id="qIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="로마자 입력 후 Enter" aria-label="로마자 답 입력">
-        <button class="go" id="qGo">확인</button>
-      </div>
+      <div class="choices" id="choices" role="group" aria-label="보기"></div>
       <p class="verdict" id="verdict" role="status" aria-live="polite"></p>
     </div>
     <div class="score">
@@ -263,8 +327,14 @@ footer{border-top:1px solid var(--grid-line-hard);padding-top:22px;font-size:12.
   </div>
 </section>
 
+<section id="secWords">
+  <h2><span class="num">05</span>이미 아는 단어로 확인</h2>
+  <p class="sub">가타카나 단어의 절반은 영어입니다. 소리 내어 읽으면 뜻이 저절로 나옵니다.</p>
+  <div class="words" id="words"></div>
+</section>
+
 <section>
-  <h2><span class="num">05</span>복습 간격</h2>
+  <h2><span class="num">06</span>복습 간격</h2>
   <p class="sub">새로 배운 날만 하면 사흘 뒤 절반이 사라집니다. 아래 간격으로 다시 꺼내면 남습니다.</p>
   <table>
     <thead><tr><th>날</th><th>새로 배우기 · 10분</th><th>다시 꺼내기 · 10분</th></tr></thead>
@@ -272,144 +342,220 @@ footer{border-top:1px solid var(--grid-line-hard);padding-top:22px;font-size:12.
   </table>
 </section>
 
-<footer>
-  8일째부터는 새 글자 없이, 매일 아침 백지에 46자를 순서대로 써보세요. 3분 안에 막힘없이 나오면 완성입니다. 그다음은 단어로 넘어가세요.
-</footer>
+<footer id="foot"></footer>
 
 </div>
 
 <script>
-/* ─────────── 데이터 ─────────── */
-const K = (k,r,kr,hint,alt=[],warn=false)=>({k,r,kr,hint,alt,warn});
+/* ─────────── 데이터 ───────────
+   K(히라가나, 가타카나, 로마자, 한글, 히라가나 힌트, 가타카나 힌트, 대체답, 강조)
+   h 또는 k 가 null 이면 그 문자에만 존재하는 항목 */
+const K = (h,k,r,kr,hh,hk,alt=[],warn=false)=>({h,k,r,kr,hh,hk,alt,warn});
 
 const DAYS = [
-  { d:1, title:'あ행 · か행', tag:'모음 5 + 첫 자음', recall:null, rows:[
-    {label:'あ행 — 모든 것의 기준', cells:[
-      K('あ','a','아','十에 리본을 묶은 모양'),
-      K('い','i','이','짧은 획 둘이 나란히'),
-      K('う','u','우','위를 올려다보는 옆얼굴'),
-      K('え','e','에','목을 뺀 새'),
-      K('お','o','오','あ와 형제, 오른쪽에 점',[],true)]},
-    {label:'か행 — 어두에서는 ㄲ에 가깝게', cells:[
-      K('か','ka','카','力(힘 력) + 점'),
-      K('き','ki','키','열쇠 key의 톱니'),
-      K('く','ku','쿠','새 부리'),
-      K('け','ke','케','ナ 옆에 세로 획'),
-      K('こ','ko','코','가로 두 줄')]}
+  { d:1, title:'あ행 · か행 / ア행 · カ행', tag:'모음 5 + 첫 자음', recall:null, rows:[
+    {label:'あ·ア행 — 모든 것의 기준', cells:[
+      K('あ','ア','a','아','十에 리본을 묶은 모양','阿의 왼쪽 부분'),
+      K('い','イ','i','이','짧은 획 둘이 나란히','사람 인(人)의 왼쪽'),
+      K('う','ウ','u','우','위를 올려다보는 옆얼굴','宇의 갓머리'),
+      K('え','エ','e','에','목을 뺀 새','한자 工과 똑같이 생김'),
+      K('お','オ','o','오','あ와 형제, 오른쪽에 점','ナ에 세로획 = 한자 才',[],true)]},
+    {label:'か·カ행 — 어두에서는 ㄲ에 가깝게', cells:[
+      K('か','カ','ka','카','力(힘 력) + 점','か에서 점을 뺀 것'),
+      K('き','キ','ki','키','열쇠 key의 톱니','き의 위쪽 두 줄만 남김'),
+      K('く','ク','ku','쿠','새 부리','く를 각지게 꺾은 모양',[],true),
+      K('け','ケ','ke','케','ナ 옆에 세로 획','ク에 획 하나 더',[],true),
+      K('こ','コ','ko','코','가로 두 줄','こ를 각지게 = ㄷ 모양')]}
   ]},
-  { d:2, title:'さ행 · た행', tag:'가장 많이 섞이는 구간', recall:'어제 배운 <b>あ·か행 10자</b>를 표 덮고 백지에 먼저 써보세요.', rows:[
-    {label:'さ행', cells:[
-      K('さ','sa','사','き에서 가로줄 하나 뺀 것',[],true),
-      K('し','shi','시','낚싯바늘 하나',['si']),
-      K('す','su','스','고리가 달린 소용돌이'),
-      K('せ','se','세','世의 축약'),
-      K('そ','so','소','지그재그 한 번')]},
-    {label:'た행 — つ 주의', cells:[
-      K('た','ta','타','た = 太의 흔적'),
-      K('ち','chi','치','さ를 좌우로 뒤집으면 ち',['ti'],true),
-      K('つ','tsu','츠','파도 한 번 (쓰 아님)',['tu'],true),
-      K('て','te','테','손 手(て)'),
-      K('と','to','토','못에 걸린 실')]}
+  { d:2, title:'さ행 · た행 / サ행 · タ행', tag:'양쪽 모두 최대 난관', recall:'어제 배운 <b>1일차 10자</b>를 표 덮고 백지에 먼저 써보세요.', rows:[
+    {label:'さ·サ행', cells:[
+      K('さ','サ','sa','사','き에서 가로줄 하나 뺀 것','さ를 각지게, 가로 두 줄',[],true),
+      K('し','シ','shi','시','낚싯바늘 하나','점 둘이 <b>왼쪽에 세로로</b>, 마지막 획은 아래→위',['si'],true),
+      K('す','ス','su','스','고리가 달린 소용돌이','す의 윗부분만 남긴 모양'),
+      K('せ','セ','se','세','世의 축약','せ에서 세로획 하나 뺀 것'),
+      K('そ','ソ','so','소','지그재그 한 번','점 하나 + 위→아래 삐침',[],true)]},
+    {label:'た·タ행 — つ / ツ 주의', cells:[
+      K('た','タ','ta','타','た = 太의 흔적','ク에 획 하나 = 한자 夕',[],true),
+      K('ち','チ','chi','치','さ를 좌우로 뒤집으면 ち','한자 千과 똑같이 생김',['ti'],true),
+      K('つ','ツ','tsu','츠','파도 한 번 (쓰 아님)','점 둘이 <b>위에 나란히</b>, 마지막 획은 위→아래',['tu'],true),
+      K('て','テ','te','테','손 手(て)','チ 위에 가로줄 하나',[],true),
+      K('と','ト','to','토','못에 걸린 실','한글 ㅏ 모양, 획 두 개')]}
   ]},
-  { d:3, title:'な행 · は행', tag:'획이 복잡해지는 날', recall:'<b>さ·た행</b>부터 백지에. 특히 <b>さ/ち</b>는 반드시 나란히 써서 확인하세요.', rows:[
-    {label:'な행', cells:[
-      K('な','na','나','た + 고리'),
-      K('に','ni','니','に = 二의 흔적'),
-      K('ぬ','nu','누','국수 끝에 매듭이 있다',[],true),
-      K('ね','ne','네','고양이 ねこ의 꼬리',[],true),
-      K('の','no','노','한 획 소용돌이')]},
-    {label:'は행 — ふ 발음 주의', cells:[
-      K('は','ha','하','조사일 때만 「와」로 읽음',[],true),
-      K('ひ','hi','히','웃는 입'),
-      K('ふ','fu','후','후지산 실루엣',['hu'],true),
-      K('へ','he','헤','한 획, 가장 쉬운 글자'),
-      K('ほ','ho','호','は에 가로줄 하나 추가',[],true)]}
+  { d:3, title:'な행 · は행 / ナ행 · ハ행', tag:'획이 복잡해지는 날', recall:'<b>2일차</b>부터 백지에. <b>さ/ち</b>와 <b>シ/ツ</b>는 반드시 나란히 써서 확인하세요.', rows:[
+    {label:'な·ナ행', cells:[
+      K('な','ナ','na','나','た + 고리','な의 왼쪽 십자만 남김'),
+      K('に','ニ','ni','니','に = 二의 흔적','한자 二 그대로'),
+      K('ぬ','ヌ','nu','누','국수 끝에 매듭이 있다','ス에 삐침 하나 추가',[],true),
+      K('ね','ネ','ne','네','고양이 ねこ의 꼬리','옷 의(衣) 변',[],true),
+      K('の','ノ','no','노','한 획 소용돌이','한 획, 오른쪽 위→왼쪽 아래')]},
+    {label:'は·ハ행 — ふ / フ 발음 주의', cells:[
+      K('は','ハ','ha','하','조사일 때만 「와」로 읽음','한자 八 그대로',[],true),
+      K('ひ','ヒ','hi','히','웃는 입','한자 比의 오른쪽'),
+      K('ふ','フ','fu','후','후지산 실루엣','한 획, ㄱ을 뒤집은 모양',['hu'],true),
+      K('へ','ヘ','he','헤','한 획, 가장 쉬운 글자','히라가나와 거의 같음'),
+      K('ほ','ホ','ho','호','は에 가로줄 하나 추가','한자 木과 똑같이 생김',[],true)]}
   ]},
-  { d:4, title:'ま행 · や행', tag:'8자, 숨 돌리는 날', recall:'<b>な·は행</b>을 백지에. <b>ぬ/め</b>와 <b>は/ほ</b>는 짝으로 확인.', rows:[
-    {label:'ま행', cells:[
-      K('ま','ma','마','가로 둘에 고리'),
-      K('み','mi','미','숫자 3에 획 하나'),
-      K('む','mu','무','소가 음메 하는 옆모습'),
-      K('め','me','메','ぬ에서 매듭을 뺀 것 = 눈 目',[],true),
-      K('も','mo','모','낚싯대에 걸린 줄')]},
-    {label:'や행 — 3자뿐', cells:[
-      K('や','ya','야','화살촉'),
-      K('ゆ','yu','유','물고기 한 마리'),
-      K('よ','yo','요','요요의 실')]}
+  { d:4, title:'ま행 · や행 / マ행 · ヤ행', tag:'8자, 숨 돌리는 날', recall:'<b>3일차</b>를 백지에. <b>ぬ/め</b>와 <b>ス/ヌ</b>는 짝으로 확인.', rows:[
+    {label:'ま·マ행', cells:[
+      K('ま','マ','ma','마','가로 둘에 고리','ア와 형제, 가운데 획이 없음',[],true),
+      K('み','ミ','mi','미','숫자 3에 획 하나','가로줄 셋 = 한자 三의 흔적'),
+      K('む','ム','mu','무','소가 음메 하는 옆모습','한자 私의 오른쪽 부분'),
+      K('め','メ','me','메','ぬ에서 매듭을 뺀 것 = 눈 目','ノ에 획 하나 = 알파벳 X',[],true),
+      K('も','モ','mo','모','낚싯대에 걸린 줄','한자 毛에서 온 모양')]},
+    {label:'や·ヤ행 — 3자뿐', cells:[
+      K('や','ヤ','ya','야','화살촉','한자 也의 축약'),
+      K('ゆ','ユ','yu','유','물고기 한 마리','한자 由의 아랫부분',[],true),
+      K('よ','ヨ','yo','요','요요의 실','가로 셋 = ㅋ을 뒤집은 모양')]}
   ]},
-  { d:5, title:'ら행 · わ행 · ん', tag:'46자 완성', recall:'<b>ま·や행</b>을 백지에. 여기까지 오면 38자입니다.', rows:[
-    {label:'ら행 — 혀끝을 한 번 튕기기', cells:[
-      K('ら','ra','라','5와 비슷한 실루엣'),
-      K('り','ri','리','짧은 획 둘, 오른쪽이 길다'),
-      K('る','ru','루','끝이 고리로 막힌다',[],true),
-      K('れ','re','레','ね와 형제, 꼬리가 곧게 뻗음',[],true),
-      K('ろ','ro','로','る에서 고리를 뺀 것 = 열림',[],true)]},
-    {label:'わ행 · 받침', cells:[
-      K('わ','wa','와','れ와 형제, 배가 둥글다',[],true),
-      K('を','wo','오','조사 전용, 소리는 お와 같음',['o']),
-      K('ん','n','응','한국어 받침 ㄴ·ㅁ·ㅇ 역할',['nn'])]}
+  { d:5, title:'ら행 · わ행 · ん / ラ행 · ワ행 · ン', tag:'46자 완성', recall:'<b>4일차</b>를 백지에. 여기까지 오면 38자입니다.', rows:[
+    {label:'ら·ラ행 — 혀끝을 한 번 튕기기', cells:[
+      K('ら','ラ','ra','라','5와 비슷한 실루엣','フ 위에 가로줄 하나'),
+      K('り','リ','ri','리','짧은 획 둘, 오른쪽이 길다','り를 곧게 편 것'),
+      K('る','ル','ru','루','끝이 고리로 막힌다','두 획, 오른쪽이 위로 뻗음',[],true),
+      K('れ','レ','re','레','ね와 형제, 꼬리가 곧게 뻗음','한 획, 알파벳 L을 뒤집은 모양',[],true),
+      K('ろ','ロ','ro','로','る에서 고리를 뺀 것 = 열림','한자 口 = 완전한 네모',[],true)]},
+    {label:'わ·ワ행 · 받침', cells:[
+      K('わ','ワ','wa','와','れ와 형제, 배가 둥글다','ウ에서 세로획을 뺀 것',[],true),
+      K('を','ヲ','wo','오','조사 전용, 소리는 お와 같음','ラ 아래를 왼쪽으로, 거의 안 씀',['o']),
+      K('ん','ン','n','응','한국어 받침 ㄴ·ㅁ·ㅇ 역할','점 하나 + <b>아래→위</b> 삐침',['nn'],true)]}
   ]},
   { d:6, title:'탁음 · 반탁음', tag:'새 글자 없음, 점 두 개', recall:'46자 <b>전체</b>를 백지에 순서대로. 여기서 막히는 글자만 오늘 집중.', rows:[
     {label:'"　゛" 를 붙이면 소리가 흐려집니다', cells:[
-      K('が','ga','가','か + 두 점'),
-      K('ざ','za','자','혀를 이에 붙였다 떼며'),
-      K('だ','da','다','た + 두 점'),
-      K('ば','ba','바','は + 두 점'),
-      K('ぱ','pa','파','は + 동그라미 = 반탁음')]},
-    {label:'예외 4자만 기억하면 끝', cells:[
-      K('じ','ji','지','し의 탁음',['zi']),
-      K('ぢ','ji','지','ち의 탁음, 거의 안 씀',['di'],true),
-      K('ず','zu','즈','す의 탁음'),
-      K('づ','zu','즈','つ의 탁음, 거의 안 씀',['du'],true)]}
+      K('が','ガ','ga','가','か + 두 점','カ + 두 점'),
+      K('ざ','ザ','za','자','혀를 이에 붙였다 떼며','サ + 두 점'),
+      K('だ','ダ','da','다','た + 두 점','タ + 두 점'),
+      K('ば','バ','ba','바','は + 두 점','ハ + 두 점'),
+      K('ぱ','パ','pa','파','は + 동그라미 = 반탁음','ハ + 동그라미 = 반탁음')]},
+    {label:'예외 4자 + 가타카나 전용 ヴ', cells:[
+      K('じ','ジ','ji','지','し의 탁음','シ의 탁음',['zi']),
+      K('ぢ','ヂ','ji','지','ち의 탁음, 거의 안 씀','チ의 탁음, 거의 안 씀',['di'],true),
+      K('ず','ズ','zu','즈','す의 탁음','ス의 탁음'),
+      K('づ','ヅ','zu','즈','つ의 탁음, 거의 안 씀','ツ의 탁음, 거의 안 씀',['du'],true),
+      K(null,'ヴ','vu','부',null,'ウ + 두 점. 영어 V 표기 전용',['bu'],true)]}
   ]},
   { d:7, title:'요음 · 촉음 · 장음', tag:'조합 규칙 + 총복습', recall:'46자 + 탁음을 백지에. 3분 안에 나오면 합격입니다.', rows:[
-    {label:'요음 — い단 + 작은 ゃゅょ', cells:[
-      K('きゃ','kya','캬','き + 작은 や'),
-      K('しゅ','shu','슈','し + 작은 ゆ'),
-      K('ちょ','cho','쵸','ち + 작은 よ'),
-      K('にゃ','nya','냐','に + 작은 や'),
-      K('りょ','ryo','료','り + 작은 よ')]},
+    {label:'요음 — い·イ단 + 작은 ゃゅょ / ャュョ', cells:[
+      K('きゃ','キャ','kya','캬','き + 작은 や','キ + 작은 ャ'),
+      K('しゅ','シュ','shu','슈','し + 작은 ゆ','シ + 작은 ュ'),
+      K('ちょ','チョ','cho','쵸','ち + 작은 よ','チ + 작은 ョ'),
+      K('にゃ','ニャ','nya','냐','に + 작은 や','ニ + 작은 ャ'),
+      K('りょ','リョ','ryo','료','り + 작은 よ','リ + 작은 ョ')]},
+    {label:'외래어 전용 조합 — 가타카나에만 있습니다', cells:[
+      K(null,'ファ','fa','파',null,'フ + 작은 ア. ファン = 팬'),
+      K(null,'ティ','ti','티',null,'テ + 작은 ィ. パーティー = 파티'),
+      K(null,'ディ','di','디',null,'デ + 작은 ィ. ディズニー = 디즈니'),
+      K(null,'ウェ','we','웨',null,'ウ + 작은 ェ. ウェブ = 웹'),
+      K(null,'ヴィ','vi','비',null,'ヴ + 작은 ィ. ヴィラ = 빌라')]},
     {label:'촉음 · 장음 — 길이가 뜻을 바꿉니다', cells:[
-      K('っ','―','받침','작은 つ. きって = 킷테, 한 박자 쉼',[],true),
-      K('ー','―','장음','가타카나에서 길게 늘이는 기호'),
-      K('おばさん','―','아줌마','장음 없음'),
-      K('おばあさん','―','할머니','あ 하나로 세대가 바뀜',[],true),
-      K('ん','n','한 박','ん도 온전히 한 박자를 차지')]}
+      K('っ','ッ','―','받침','작은 つ. きって = 킷테, 한 박자 쉼','작은 ツ. コップ = 콥푸, 한 박자 쉼',[],true),
+      K(null,'ー','―','장음',null,'가로 막대 하나로 앞 모음을 한 박 늘림',[],true),
+      K('おばさん',null,'―','아줌마','장음 없음',null),
+      K('おばあさん',null,'―','할머니','あ 하나로 세대가 바뀜',null,[],true),
+      K(null,'ビール','―','맥주',null,'ビル(빌딩) + ー 하나로 뜻이 바뀜',[],true)]}
   ]}
 ];
 
 const PAIRS = [
-  {g:['き','さ'],p:'き는 가로줄이 <em>둘</em>, さ는 <em>하나</em>. 나머지는 똑같습니다.'},
-  {g:['ぬ','め'],p:'ぬ는 끝에 <em>매듭</em>이 있고, め는 없습니다. 국수(ぬ) 끝은 묶여 있다.'},
-  {g:['は','ほ','ま'],p:'ほ는 は의 오른쪽에 가로줄이 <em>하나 더</em>. ま는 왼쪽 세로획이 없습니다.'},
-  {g:['る','ろ'],p:'る는 끝이 <em>고리로 닫히고</em>, ろ는 열린 채 끝납니다.'},
-  {g:['わ','ね','れ'],p:'오른쪽 아래만 보세요. わ는 <em>둥글게</em>, ね는 <em>고리</em>, れ는 <em>바깥으로</em>.'},
-  {g:['い','り'],p:'い는 획 둘이 <em>떨어져</em> 있고, り는 위가 <em>이어질 듯</em> 붙어 곡선을 그립니다.'}
+  {s:'h',g:['き','さ'],p:'き는 가로줄이 <em>둘</em>, さ는 <em>하나</em>. 나머지는 똑같습니다.'},
+  {s:'h',g:['ぬ','め'],p:'ぬ는 끝에 <em>매듭</em>이 있고, め는 없습니다. 국수(ぬ) 끝은 묶여 있다.'},
+  {s:'h',g:['は','ほ','ま'],p:'ほ는 は의 오른쪽에 가로줄이 <em>하나 더</em>. ま는 왼쪽 세로획이 없습니다.'},
+  {s:'h',g:['る','ろ'],p:'る는 끝이 <em>고리로 닫히고</em>, ろ는 열린 채 끝납니다.'},
+  {s:'h',g:['わ','ね','れ'],p:'오른쪽 아래만 보세요. わ는 <em>둥글게</em>, ね는 <em>고리</em>, れ는 <em>바깥으로</em>.'},
+  {s:'h',g:['い','り'],p:'い는 획 둘이 <em>떨어져</em> 있고, り는 위가 <em>이어질 듯</em> 붙어 곡선을 그립니다.'},
+  {s:'k',g:['シ','ツ'],p:'<em>획의 방향</em>이 전부입니다. シ는 점이 <em>왼쪽에 세로로</em>, 마지막 획을 <em>아래에서 위로</em>. ツ는 점이 <em>위에 나란히</em>, 마지막 획을 <em>위에서 아래로</em>.'},
+  {s:'k',g:['ソ','ン'],p:'シ·ツ와 <em>완전히 같은 규칙</em>입니다. ン은 아래에서 <em>위로</em>(シ 계열), ソ는 위에서 <em>아래로</em>(ツ 계열). 넷을 방향 규칙 하나로 묶으세요.'},
+  {s:'k',g:['ク','ケ','タ'],p:'ク가 기본. ケ는 위에 <em>삐침</em>이 하나 더, タ는 안쪽에 <em>점</em>이 하나.'},
+  {s:'k',g:['ス','ヌ'],p:'ヌ는 ス의 가로획 왼쪽으로 <em>삐침이 하나</em> 더 나옵니다.'},
+  {s:'k',g:['ウ','ワ','フ'],p:'フ가 뼈대. ワ는 위에 <em>왼쪽 획</em>이 붙고, ウ는 거기에 <em>세로 점</em>까지 올라갑니다.'},
+  {s:'k',g:['コ','ユ','ロ','ヨ'],p:'ロ는 <em>닫힌 네모</em>, ヨ는 <em>왼쪽이 열린</em> 가로줄 셋, コ는 가로 <em>둘</em>, ユ는 <em>세로획 + 긴 아래줄</em>.'},
+  {s:'b',g:['り','リ'],p:'같은 소리 ri. 히라가나는 <em>곡선</em>으로 이어질 듯 흐르고, 가타카나는 <em>직선</em> 두 획으로 끊어집니다. 가나 쌍은 대부분 이 「곡선 대 직선」 관계입니다.'},
+  {s:'b',g:['へ','ヘ'],p:'46쌍 중 <em>거의 구별되지 않는</em> 유일한 쌍입니다. 문맥으로 판단하며, 실제로 틀려도 문제되지 않습니다.'},
+  {s:'b',g:['か','カ'],p:'か에서 <em>점 하나를 뗀 것</em>이 カ입니다. き→キ, せ→セ, も→モ처럼 <em>히라가나의 일부를 잘라낸</em> 쌍이 많으니, 아는 쪽에서 유추하세요.'}
 ];
 
 const NOTES = [
-  {g:'つ',p:'<b>쓰</b>가 아니라 <b>츠</b>입니다. 한국어 「ㅅ」로 발음하면 す와 구별이 안 됩니다. 혀끝을 이 뒤에 붙였다 떼며 「츠」.'},
-  {g:'ふ',p:'영어 f처럼 <b>윗니로 아랫입술을 물지 않습니다</b>. 촛불을 끄듯 두 입술 사이로 「후」.'},
-  {g:'ら행',p:'한국어 <b>ㄹ과 ㄷ의 중간</b>. 혀끝으로 입천장을 한 번만 톡 튕깁니다. 영어 R로 굴리면 어색해집니다.'},
-  {g:'か·た·ぱ',p:'단어 <b>맨 앞에서는 ㄲ·ㄸ·ㅃ</b>에 가깝고, <b>중간에서는 ㄱ·ㄷ·ㅂ</b>처럼 들립니다. たかい는 「타카이」보다 「따까이」에 가깝습니다.'},
-  {g:'ん',p:'뒤에 오는 소리에 따라 <b>ㄴ·ㅁ·ㅇ</b>으로 바뀝니다. さんぽ는 「삼뽀」, さんかい는 「상까이」. 의식하지 않아도 자연히 됩니다.'},
-  {g:'장음',p:'한국어에 없는 개념이라 가장 많이 틀립니다. <b>おばさん(아줌마) / おばあさん(할머니)</b>처럼 길이 하나가 뜻을 바꿉니다.'}
+  {s:'b',gh:'つ',gk:'ツ',p:'<b>쓰</b>가 아니라 <b>츠</b>입니다. 한국어 「ㅅ」로 발음하면 す·ス와 구별이 안 됩니다. 혀끝을 이 뒤에 붙였다 떼며 「츠」.'},
+  {s:'b',gh:'ふ',gk:'フ',p:'영어 f처럼 <b>윗니로 아랫입술을 물지 않습니다</b>. 촛불을 끄듯 두 입술 사이로 「후」.'},
+  {s:'b',gh:'ら행',gk:'ラ행',p:'한국어 <b>ㄹ과 ㄷ의 중간</b>. 혀끝으로 입천장을 한 번만 톡 튕깁니다. 영어 L과 R이 <b>모두 이 한 줄</b>로 들어오므로 ライト는 light일 수도 right일 수도 있습니다.'},
+  {s:'b',gh:'か た ぱ',gk:'カ タ パ',p:'단어 <b>맨 앞에서는 ㄲ·ㄸ·ㅃ</b>에 가깝고, <b>중간에서는 ㄱ·ㄷ·ㅂ</b>처럼 들립니다. たかい는 「타카이」보다 「따까이」에 가깝습니다.'},
+  {s:'b',gh:'ん',gk:'ン',p:'뒤에 오는 소리에 따라 <b>ㄴ·ㅁ·ㅇ</b>으로 바뀝니다. さんぽ는 「삼뽀」, さんかい는 「상까이」. 의식하지 않아도 자연히 됩니다.'},
+  {s:'h',gh:'は へ',gk:null,p:'조사로 쓰일 때만 <b>は=와, へ=에</b>로 읽습니다. 글자가 바뀌는 게 아니라 <b>읽는 법만</b> 바뀝니다. わたし<b>は</b> = 와타시와.'},
+  {s:'h',gh:'장음',gk:null,p:'히라가나 장음은 <b>모음을 한 번 더 적어</b> 나타냅니다. <b>おばさん(아줌마) / おばあさん(할머니)</b>처럼 길이 하나가 뜻을 바꿉니다.'},
+  {s:'k',gh:null,gk:'ー',p:'가타카나 장음은 <b>글자 대신 가로 막대</b>로 씁니다. 히라가나에는 없는 규칙입니다. <b>ビル(빌딩) / ビール(맥주)</b>. 세로쓰기에서는 세로 막대로 방향이 바뀝니다.'},
+  {s:'k',gh:null,gk:'쓰임',p:'가타카나는 <b>외래어·의성어·강조·동식물 학명</b>에 씁니다. 그래서 간판·메뉴판·제품 포장이 온통 가타카나입니다. 실생활에서 마주치는 빈도는 히라가나 못지않습니다.'},
+  {s:'k',gh:null,gk:'받침',p:'한국어 받침은 가타카나에서 <b>글자 하나</b>가 됩니다. ㄴ·ㅁ·ㅇ → <b>ン</b>(강남 = カンナム), ㄱ → <b>ク</b>, ㅂ → <b>プ</b>, ㅅ → <b>ス</b>. 그래서 외래어가 원어보다 길어집니다.'}
+];
+
+const WORDS = [
+  {w:'コーヒー',r:'kōhī',m:'커피'},
+  {w:'テレビ',r:'terebi',m:'텔레비전'},
+  {w:'カメラ',r:'kamera',m:'카메라'},
+  {w:'パン',r:'pan',m:'빵'},
+  {w:'ビール',r:'bīru',m:'맥주'},
+  {w:'ホテル',r:'hoteru',m:'호텔'},
+  {w:'タクシー',r:'takushī',m:'택시'},
+  {w:'ラーメン',r:'rāmen',m:'라멘'},
+  {w:'ケーキ',r:'kēki',m:'케이크'},
+  {w:'アイスクリーム',r:'aisukurīmu',m:'아이스크림'},
+  {w:'コンビニ',r:'konbini',m:'편의점 (convenience)'},
+  {w:'スマホ',r:'sumaho',m:'스마트폰 (smart phone)'}
 ];
 
 const SCHED = [
-  ['1일','あ행 · か행 (10자)','—'],
-  ['2일','さ행 · た행 (10자)','1일차'],
-  ['3일','な행 · は행 (10자)','2일차 + 1일차'],
-  ['4일','ま행 · や행 (8자)','3일차 + 1일차'],
-  ['5일','ら행 · わ행 · ん (8자)','4일차 + 2일차'],
-  ['6일','탁음 · 반탁음','46자 전체'],
-  ['7일','요음 · 촉음 · 장음','46자 + 탁음 전체']
+  ['1일','あ·か행 / ア·カ행 (10쌍)','—'],
+  ['2일','さ·た행 / サ·タ행 (10쌍)','1일차'],
+  ['3일','な·は행 / ナ·ハ행 (10쌍)','2일차 + 1일차'],
+  ['4일','ま·や행 / マ·ヤ행 (8쌍)','3일차 + 1일차'],
+  ['5일','ら·わ행 · ん / ラ·ワ행 · ン (8쌍)','4일차 + 2일차'],
+  ['6일','탁음 · 반탁음 · ヴ','46쌍 전체'],
+  ['7일','요음 · 촉음 · 장음 · 외래어 조합','46쌍 + 탁음 전체']
 ];
 
-/* ─────────── 렌더 ─────────── */
+const COPY = {
+  h:{ sub:'날짜를 눌러 그날 분량을 확인하세요.',
+      foot:'8일째부터는 새 글자 없이, 매일 아침 백지에 <b>46자를 순서대로</b> 써보세요. 3분 안에 막힘없이 나오면 완성입니다. 그다음은 단어로 넘어가세요.' },
+  k:{ sub:'날짜를 눌러 그날 분량을 확인하세요.',
+      foot:'8일째부터는 새 글자 없이, 거리 간판·메뉴판·제품 포장의 가타카나를 소리 내어 읽으세요. 가타카나는 쓰기보다 <b>읽는 속도</b>가 실력입니다.' },
+  b:{ sub:'날짜를 눌러 그날 분량을 확인하세요. 왼쪽이 히라가나, 오른쪽이 가타카나 — <b>같은 소리</b>입니다.',
+      foot:'8일째부터는 새 글자 없이, 매일 아침 백지에 <b>46쌍을 순서대로</b> 써보세요. あ 옆에 ア를 함께 적으면 두 벌이 한 번에 굳습니다. 5분 안에 나오면 완성입니다.' }
+};
+
+/* ─────────── 모드 ─────────── */
+const MODES = [
+  {id:'h',label:'HIRAGANA',jp:'ひらがな'},
+  {id:'k',label:'KATAKANA',jp:'カタカナ'},
+  {id:'b',label:'BOTH',jp:'かな・カナ'}
+];
+let mode = 'b';
+const has = c => mode==='h' ? !!c.h : mode==='k' ? !!c.k : (!!c.h || !!c.k);
+
 const $ = s=>document.querySelector(s);
 
+const modebar = $('#modebar');
+MODES.forEach(m=>{
+  const b=document.createElement('button');
+  b.className='mode';b.setAttribute('aria-pressed', m.id===mode);
+  b.innerHTML=`${m.label}<b>${m.jp}</b>`;
+  b.onclick=()=>setMode(m.id);
+  modebar.appendChild(b);
+});
+
+function setMode(id){
+  mode=id;
+  document.body.className='m-'+id;
+  [...modebar.children].forEach((c,i)=>c.setAttribute('aria-pressed',MODES[i].id===id));
+  $('#sub01').innerHTML=COPY[id].sub;
+  $('#foot').innerHTML=COPY[id].foot;
+  $('#secWords').hidden = (id==='h');
+  selectDay(curDay);
+  renderPairs();
+  renderNotes();
+  build();
+}
+
+/* ─────────── 진도표 ─────────── */
 const tabs = $('#tabs');
+let curDay = 0;
 DAYS.forEach((d,i)=>{
   const b=document.createElement('button');
   b.className='tab';b.setAttribute('role','tab');b.setAttribute('aria-selected',i===0);
@@ -418,29 +564,75 @@ DAYS.forEach((d,i)=>{
   tabs.appendChild(b);
 });
 
+function dayTitle(d){
+  if(mode==='b') return d.title;
+  const parts = d.title.split(' / ');
+  if(parts.length===2) return mode==='h' ? parts[0] : parts[1];
+  return d.title;
+}
+function rowLabel(r){
+  if(mode==='b') return r.label;
+  const pick=(_,a,b)=> mode==='h' ? a : b;
+  return r.label
+    .replace(/([ぁ-ん]+)·([ァ-ヴー]+)/g, pick)
+    .replace(/([ぁ-ん]+) \/ ([ァ-ヴー]+)/g, pick);
+}
+
 function selectDay(i){
+  curDay=i;
   [...tabs.children].forEach((t,j)=>t.setAttribute('aria-selected',i===j));
   const d=DAYS[i];
-  let h=`<div class="daybar"><h3>${d.title}</h3><span class="meta">${d.tag}</span></div>`;
+  let h=`<div class="daybar"><h3>${dayTitle(d)}</h3><span class="meta">${d.tag}</span></div>`;
   if(d.recall) h+=`<p class="recall"><b>먼저 꺼내기 ·</b> ${d.recall}</p>`;
   d.rows.forEach(r=>{
-    h+=`<div class="rowlabel">${r.label}</div><div class="cells">`;
-    r.cells.forEach(c=>{
-      h+=`<div class="cell${c.warn?' warn':''}"><span class="kana">${c.k}</span>
-          <span class="kr">${c.kr}</span><span class="rom">${c.r}</span>
-          <span class="hint">${c.hint}</span></div>`;
+    const cells = r.cells.filter(has);
+    if(!cells.length) return;
+    const duo = mode==='b' && cells.some(c=>c.h&&c.k);
+    h+=`<div class="rowlabel">${rowLabel(r)}</div><div class="cells${duo?' duo':''}">`;
+    cells.forEach(c=>{
+      let glyph='';
+      if(mode==='b'&&c.h&&c.k) glyph=`<span class="kana">${c.h}</span><span class="sep">/</span><span class="kana">${c.k}</span>`;
+      else glyph=`<span class="kana">${mode==='h'?c.h:(mode==='k'?c.k:(c.h||c.k))}</span>`;
+      let only='';
+      if(mode==='b'&&!c.h) only='<span class="tagonly">カナ</span>';
+      if(mode==='b'&&!c.k) only='<span class="tagonly">かな</span>';
+      let hints='';
+      if(mode==='b'){
+        if(c.hh) hints+=`<span class="hint"><span class="b">か</span>${c.hh}</span>`;
+        if(c.hk) hints+=`<span class="hint"><span class="b">カ</span>${c.hk}</span>`;
+      }else{
+        const t = mode==='h'?c.hh:c.hk;
+        if(t) hints=`<span class="hint">${t}</span>`;
+      }
+      h+=`<div class="cell${c.warn?' warn':''}">${only}<span class="glyphrow">${glyph}</span>
+          <span class="kr">${c.kr}</span><span class="rom">${c.r}</span>${hints}</div>`;
     });
     h+=`</div>`;
   });
   $('#dayPanel').innerHTML=h;
 }
-selectDay(0);
 
-$('#pairs').innerHTML = PAIRS.map(p=>
-  `<div class="pair"><div class="glyphs">${p.g.join(' <em>/</em> ')}</div><p>${p.p}</p></div>`).join('');
+/* ─────────── 짝 · 노트 ─────────── */
+function renderPairs(){
+  const list = PAIRS.filter(p=> mode==='b' ? true : (p.s===mode||p.s==='b'));
+  $('#pairs').innerHTML = list.map(p=>{
+    const tag = mode==='b' ? `<span class="s">${p.s==='h'?'かな':p.s==='k'?'カナ':'かな × カナ'}</span>` : '';
+    return `<div class="pair">${tag}<div class="glyphs">${p.g.join(' <em>/</em> ')}</div><p>${p.p}</p></div>`;
+  }).join('');
+}
+function renderNotes(){
+  const list = NOTES.filter(n=> mode==='b' ? true : (n.s===mode||n.s==='b'));
+  $('#notes').innerHTML = list.map(n=>{
+    let g;
+    if(mode==='h') g=n.gh;
+    else if(mode==='k') g=n.gk;
+    else g=[n.gh,n.gk].filter(Boolean).join('&nbsp; ');
+    return `<div class="note"><div class="g">${g||''}</div><p>${n.p}</p></div>`;
+  }).join('');
+}
 
-$('#notes').innerHTML = NOTES.map(n=>
-  `<div class="note"><div class="g">${n.g}</div><p>${n.p}</p></div>`).join('');
+$('#words').innerHTML = WORDS.map(w=>
+  `<div class="word"><div class="w">${w.w}</div><div class="m"><b>${w.m}</b> · ${w.r}</div></div>`).join('');
 
 $('#sched').innerHTML = SCHED.map(r=>
   `<tr><td class="d">${r[0]}</td><td>${r[1]}</td><td class="r">${r[2]}</td></tr>`).join('');
@@ -449,6 +641,7 @@ $('#sched').innerHTML = SCHED.map(r=>
 const POOLS = [
   {id:1,label:'DAY 1'},{id:2,label:'DAY 2'},{id:3,label:'DAY 3'},
   {id:4,label:'DAY 4'},{id:5,label:'DAY 5'},{id:6,label:'탁음'},
+  {id:7,label:'요음·장음'},
   {id:'all',label:'46자 전체'}
 ];
 let active = new Set([1]);
@@ -471,32 +664,65 @@ POOLS.forEach(p=>{
   bar.appendChild(b);
 });
 
-let queue=[], cur=null, ok=0, no=0, answered=false;
+let queue=[], cur=null, ok=0, no=0, answered=false, pool=[];
 
 function build(){
   const list=[];
   DAYS.filter(d=>active.has(d.d)).forEach(d=>
-    d.rows.forEach(r=>r.cells.forEach(c=>{ if(c.r!=='―') list.push(c); })));
+    d.rows.forEach(r=>r.cells.forEach(c=>{
+      if(c.r==='―') return;
+      const push=(g,s)=>list.push({g,s,r:c.r,kr:c.kr,alt:c.alt});
+      if(mode!=='k' && c.h) push(c.h,'h');
+      if(mode!=='h' && c.k) push(c.k,'k');
+    })));
+  // 오답 후보 = 선택 범위의 로마자, 부족하면 전체에서 보충
+  const uniq=new Map();
+  list.forEach(x=>uniq.set(x.r,{r:x.r,kr:x.kr}));
+  if(uniq.size<4){
+    DAYS.forEach(d=>d.rows.forEach(r=>r.cells.forEach(c=>{
+      if(c.r!=='―') uniq.set(c.r,{r:c.r,kr:c.kr});
+    })));
+  }
+  pool=[...uniq.values()];
   queue = list.sort(()=>Math.random()-.5);
   ok=0;no=0;
   next();
 }
 
+function options(c){
+  const wrong = pool.filter(x=>x.r!==c.r).sort(()=>Math.random()-.5).slice(0,3);
+  return [{r:c.r,kr:c.kr},...wrong].sort(()=>Math.random()-.5);
+}
+
+function renderChoices(){
+  const box=$('#choices');
+  box.innerHTML='';
+  if(!cur) return;
+  options(cur).forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='choice';
+    b.innerHTML=`<span class="cn">${i+1}</span><span class="cr">${o.r}</span><span class="ck">${o.kr}</span>`;
+    b.onclick=()=>pick(o.r,b);
+    box.appendChild(b);
+  });
+}
+
 function next(){
   answered=false;
   $('#mark').innerHTML='';
-  $('#qIn').value='';$('#qIn').disabled=false;
   $('#verdict').textContent='';$('#verdict').className='verdict';
   if(!queue.length){
     cur=null;
     $('#qKana').textContent='○';
+    $('#qTag').textContent='';
+    $('#choices').innerHTML='';
     $('#verdict').textContent='끝. 칩을 눌러 다음 범위로.';
     $('#verdict').className='verdict ok';
-    $('#qIn').disabled=true;
   }else{
     cur=queue[0];
-    $('#qKana').textContent=cur.k;
-    $('#qIn').focus();
+    $('#qKana').textContent=cur.g;
+    $('#qTag').textContent = mode==='b' ? (cur.s==='h'?'ひらがな':'カタカナ') : '';
+    renderChoices();
   }
   score();
 }
@@ -514,31 +740,45 @@ function batsu(){
   $('#mark').innerHTML='<path d="M38 38 L132 132" stroke-dasharray="133" stroke-dashoffset="133"><animate attributeName="stroke-dashoffset" from="133" to="0" dur=".2s" fill="freeze"/></path><path d="M132 38 L38 132" stroke-dasharray="133" stroke-dashoffset="133"><animate attributeName="stroke-dashoffset" from="133" to="0" dur=".2s" begin=".16s" fill="freeze"/></path>';
 }
 
-function check(){
-  if(!cur) return;
-  if(answered){ next(); return; }
-  const v=$('#qIn').value.trim().toLowerCase();
-  if(!v) return;
-  const good=[cur.r.toLowerCase(),...cur.alt].includes(v);
+function pick(r,btn){
+  if(!cur||answered) return;
   answered=true;
+  const good = r===cur.r;
+  const btns=[...$('#choices').children];
+  btns.forEach(b=>{
+    b.disabled=true;
+    const v=b.querySelector('.cr').textContent;
+    if(v===cur.r) b.classList.add('ok');
+    else if(b===btn) b.classList.add('no');
+    else b.classList.add('dim');
+  });
   queue.shift();
   if(good){
     ok++; maru();
     $('#verdict').textContent='○  '+cur.kr;
     $('#verdict').className='verdict ok';
-    setTimeout(next,620);
+    setTimeout(next,640);
   }else{
     no++; batsu();
-    $('#verdict').innerHTML=`×  ${cur.k} = <b>${cur.r}</b> · ${cur.kr} — Enter로 계속`;
+    $('#verdict').innerHTML=`×  ${cur.g} = <b>${cur.r}</b> · ${cur.kr} — 아무 키나 눌러 계속`;
     $('#verdict').className='verdict no';
     queue.splice(Math.min(3,queue.length),0,cur); // 틀린 건 세 문제 뒤에 다시
+    setTimeout(()=>{ if(answered) next(); },1800);
   }
   score();
 }
 
-$('#qGo').onclick=check;
-$('#qIn').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();check();} });
-build();
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT') return;
+  if(answered){ if(e.key.length===1||e.key==='Enter'){ e.preventDefault(); next(); } return; }
+  const n=parseInt(e.key,10);
+  if(n>=1&&n<=4){
+    const b=$('#choices').children[n-1];
+    if(b){ e.preventDefault(); b.click(); }
+  }
+});
+
+setMode('b');
 </script>
 </body>
 </html>
