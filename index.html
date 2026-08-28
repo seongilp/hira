@@ -73,6 +73,15 @@ h1 .jp{display:block;font-size:.52em;color:var(--grid);letter-spacing:.06em;marg
 .lede{position:relative;max-width:48ch;margin:22px 0 0;color:var(--ink-soft);font-size:15.5px}
 .lede b{color:var(--ink);font-weight:500}
 
+/* ── 언어 전환 ───────────────────── */
+.langbar{position:relative;display:flex;border:1px solid var(--grid-line-hard);border-radius:2px;overflow:hidden;max-width:430px;background:var(--paper-2);margin:0 0 26px}
+.langbar a{flex:1;text-align:center;padding:9px 6px;text-decoration:none;border-right:1px solid var(--grid-line);
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink-soft);transition:background .15s,color .15s}
+.langbar a:last-child{border-right:0}
+.langbar a b{display:block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:0;margin-top:2px}
+.langbar a:hover{background:rgba(0,0,0,.04)}
+.langbar a[aria-current="page"]{background:var(--grid);color:var(--paper-2)}
+
 /* ── 문자 전환 ───────────────────── */
 .modebar{
   position:relative;display:flex;gap:0;margin:30px 0 0;
@@ -88,6 +97,25 @@ h1 .jp{display:block;font-size:.52em;color:var(--grid);letter-spacing:.06em;marg
 .mode:hover{background:rgba(0,0,0,.04)}
 .mode[aria-pressed="true"]{background:var(--grid);color:var(--paper-2)}
 .mode:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+
+/* ── 메인 탭 ───────────────────── */
+.maintabs{
+  position:sticky;top:0;z-index:30;display:flex;
+  background:var(--paper-2);border:1px solid var(--grid-line-hard);border-radius:2px;
+  overflow:hidden;margin:0 0 42px;
+  box-shadow:0 6px 18px -14px rgba(0,0,0,.5);
+}
+.mtab{
+  flex:1;background:transparent;border:0;border-right:1px solid var(--grid-line);
+  padding:12px 6px 13px;cursor:pointer;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  color:var(--ink-soft);transition:background .15s,color .15s;
+}
+.mtab:last-child{border-right:0}
+.mtab b{display:block;font-family:var(--serif);font-size:16px;font-weight:700;letter-spacing:.02em;margin-top:3px}
+.mtab:hover{background:rgba(0,0,0,.04)}
+.mtab[aria-selected="true"]{background:var(--grid);color:var(--paper-2)}
+.mtab:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
 
 /* ── 섹션 ───────────────────── */
 section{margin:0 0 64px}
@@ -163,8 +191,8 @@ h2 .num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--red);
 }
 
 /* ── 헷갈리는 짝 ───────────────────── */
-.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:1px;background:var(--grid-line-hard);border:1px solid var(--grid-line-hard)}
-.pair{background:var(--paper-2);padding:16px 17px;position:relative}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:0;border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard)}
+.pair{background:var(--paper-2);padding:16px 17px;position:relative;border-right:1px solid var(--grid-line-hard);border-bottom:1px solid var(--grid-line-hard)}
 .pair .glyphs{font-family:var(--serif);font-size:34px;font-weight:500;letter-spacing:.1em;line-height:1.2}
 .pair .glyphs em{font-style:normal;color:var(--red)}
 .pair p{margin:7px 0 0;font-size:12.8px;line-height:1.55;color:var(--ink-soft)}
@@ -181,8 +209,8 @@ h2 .num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--red);
 .note p b{color:var(--ink);font-weight:500}
 
 /* ── 단어 ───────────────────── */
-.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;background:var(--grid-line-hard);border:1px solid var(--grid-line-hard)}
-.word{background:var(--paper-2);padding:14px 16px}
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0;border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard)}
+.word{background:var(--paper-2);padding:14px 16px;border-right:1px solid var(--grid-line-hard);border-bottom:1px solid var(--grid-line-hard)}
 .word .w{font-family:var(--serif);font-size:23px;font-weight:500;letter-spacing:.04em}
 .word .m{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
 .word .m b{color:var(--ink);font-weight:500}
@@ -250,6 +278,114 @@ h2 .num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--red);
 }
 .score b{color:var(--ink);font-weight:500}
 
+/* ── 동사 ───────────────────── */
+.vrules{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(252px,1fr));gap:0;
+  border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard);margin:0 0 30px;
+}
+.vrule{background:var(--paper-2);padding:15px 17px 16px;border-right:1px solid var(--grid-line-hard);border-bottom:1px solid var(--grid-line-hard)}
+.vrule .t{font-family:var(--serif);font-size:17px;font-weight:700;display:flex;align-items:baseline;gap:9px}
+.vrule .t i{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--red)}
+.vrule p{margin:8px 0 0;font-size:12.8px;line-height:1.62;color:var(--ink-soft)}
+.vrule p b{color:var(--ink);font-weight:500}
+.vrule p em{font-style:normal;color:var(--red);font-weight:500}
+.vrule .jp{font-family:var(--serif);font-size:14px;color:var(--grid);font-weight:500}
+
+.vset{margin:20px 0 0}
+.vsethead{margin:0 0 11px}
+.vsethead .n{font-family:var(--serif);font-size:18.5px;font-weight:700;letter-spacing:.02em;line-height:1.3}
+.vsethead .n i{font-style:normal;color:var(--grid);opacity:.5;font-weight:400;margin:0 3px}
+.vsethead .tp{font-size:12.6px;line-height:1.6;color:var(--ink-soft);margin-top:4px;max-width:70ch}
+.vsethead .tp b{color:var(--ink);font-weight:500}
+.vsethead .tp .jp{font-family:var(--serif);color:var(--grid);font-weight:500}
+.vsethead .tp em{font-style:normal;color:var(--red);font-weight:500}
+.verbs{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(298px,1fr));gap:0;
+  border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard);
+}
+.verb{background:var(--paper-2);padding:15px 17px 15px;position:relative;border-right:1px solid var(--grid-line-hard);border-bottom:1px solid var(--grid-line-hard)}
+.verb .vhead{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-right:46px}
+.verb .vj{font-family:var(--serif);font-size:25px;font-weight:700;line-height:1.15;letter-spacing:.02em}
+.verb .vr{font-family:var(--serif);font-size:13px;color:var(--grid)}
+.verb .vm{font-size:14px;font-weight:500;margin-top:4px}
+.vgrp{
+  position:absolute;top:13px;right:15px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.1em;color:var(--grid);border:1px solid var(--grid-line);
+  border-radius:2px;padding:1px 5px;line-height:1.6;
+}
+.vgrp.ex{color:var(--red);border-color:rgba(196,64,46,.45)}
+.vconj{
+  display:flex;margin:12px 0 0;
+  border-top:1px solid var(--grid-line);border-bottom:1px solid var(--grid-line);
+}
+.vconj div{flex:1;padding:7px 4px 8px;text-align:center}
+.vconj div+div{border-left:1px solid var(--grid-line)}
+.vconj .l{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--grid);opacity:.7}
+.vconj .v{font-family:var(--serif);font-size:16.5px;font-weight:500;line-height:1.4}
+.vconj .v em{font-style:normal;color:var(--red)}
+.vex{margin-top:12px}
+.vex .ej{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.5}
+.vex .er{display:block;font-size:11.5px;line-height:1.5;color:var(--grid);margin-top:4px}
+.vex .er .kn{font-family:var(--serif)}
+.vex .er .sl{opacity:.45;margin:0 5px}
+.vex .ek{display:block;font-size:12.6px;color:var(--ink-soft);margin-top:3px}
+
+/* ── 말 트기 ───────────────────── */
+.talks{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:0;
+  border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard);
+}
+.talk{background:var(--paper-2);padding:15px 17px 15px;border-right:1px solid var(--grid-line-hard);border-bottom:1px solid var(--grid-line-hard)}
+.talk .tj{font-family:var(--serif);font-size:19px;font-weight:500;line-height:1.45;display:block}
+.talk .tr{display:block;font-size:11.5px;line-height:1.5;color:var(--grid);margin-top:5px}
+.talk .tr .kn{font-family:var(--serif)}
+.talk .tr .sl{opacity:.45;margin:0 5px}
+.talk .tk{display:block;font-size:13.4px;font-weight:500;margin-top:5px}
+.talk .tn{
+  display:block;font-size:12px;line-height:1.58;color:var(--ink-soft);
+  margin-top:9px;padding-top:9px;border-top:1px solid var(--grid-line);
+}
+.talk .tn b{color:var(--ink);font-weight:500}
+.talk .tn .jp{font-family:var(--serif);color:var(--grid);font-weight:500}
+.talk.star{background:var(--paper)}
+.talk.star .tj{color:var(--red)}
+
+/* ── 생활 단어 ───────────────────── */
+.vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(146px,1fr));gap:0;border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard)}
+.vc{background:var(--paper-2);padding:11px 13px 12px;border-right:1px solid var(--grid-line-hard);border-bottom:1px solid var(--grid-line-hard)}
+.vc .w{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1.28;display:block}
+.vc .r{font-family:var(--serif);font-size:11.5px;color:var(--grid);display:block;margin-top:3px;line-height:1.4}
+.vc .p{font-size:10.5px;color:var(--ink-soft);display:block;line-height:1.4}
+.vc .m{font-size:12.5px;font-weight:500;display:block;margin-top:6px}
+.vc.warn .w{color:var(--red)}
+.exs{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(266px,1fr));gap:0;
+  border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard);margin-top:14px;
+}
+.exc{background:var(--paper);padding:13px 16px 14px;border-right:1px solid var(--grid-line-hard);border-bottom:1px solid var(--grid-line-hard)}
+.exc .vex{margin-top:0}
+
+/* ── 이어주는 말 ───────────────────── */
+.conjs{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:0;
+  border-top:1px solid var(--grid-line-hard);border-left:1px solid var(--grid-line-hard);
+}
+.conj{background:var(--paper-2);padding:15px 17px 15px;border-right:1px solid var(--grid-line-hard);border-bottom:1px solid var(--grid-line-hard)}
+.conj .chead{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.conj .cw{font-family:var(--serif);font-size:24px;font-weight:700;line-height:1.2;letter-spacing:.02em}
+.conj .cp{font-size:12.5px;color:var(--grid)}
+.conj .cm{font-size:14px;font-weight:500;margin-top:4px}
+.conj .cn{
+  font-size:12.2px;line-height:1.58;color:var(--ink-soft);
+  margin-top:9px;padding-top:9px;border-top:1px solid var(--grid-line);
+}
+.conj .cn b{color:var(--ink);font-weight:500}
+.conj .cn .jp{font-family:var(--serif);color:var(--grid);font-weight:500}
+.conj .cn em{font-style:normal;color:var(--red);font-weight:500}
+.conj .vex{margin-top:11px}
+.conj.star{background:var(--paper)}
+.conj.star .cw{color:var(--red)}
+
 /* ── 스케줄 ───────────────────── */
 table{width:100%;border-collapse:collapse;font-size:13.4px}
 th,td{border:1px solid var(--grid-line-hard);padding:10px 12px;text-align:left;background:var(--paper-2)}
@@ -270,7 +406,7 @@ footer b{color:var(--ink);font-weight:500}
   .note{grid-template-columns:56px 1fr;gap:12px}
   .square{width:140px;height:140px}
   #qKana{font-size:76px}
-  .modebar{max-width:none}
+  .modebar,.langbar{max-width:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -279,33 +415,41 @@ footer b{color:var(--ink);font-weight:500}
 <div class="wrap">
 
 <header>
+  <div class="langbar">
+    <a href="index.html" aria-current="page">JAPANESE<b>일본어</b></a>
+    <a href="italian.html">ITALIANO<b>이탈리아어</b></a>
+    <a href="french.html">FRANCAIS<b>프랑스어</b></a>
+    <a href="spanish.html">ESPANOL<b>스페인어</b></a>
+  </div>
   <div class="eyebrow">7-day plan · 46 + 46 characters</div>
   <h1>가나 일주일<span class="jp">かな・カナ 七日</span></h1>
   <p class="lede">히라가나와 가타카나는 <b>같은 46개의 소리</b>를 적는 두 벌의 옷입니다. 따로 배우면 두 배 걸리고, 같은 행을 나란히 배우면 한 번에 끝납니다. 매일 새 한 줄을 채우고, 어제 것을 백지에서 꺼내세요.</p>
   <div class="modebar" id="modebar" role="group" aria-label="문자 선택"></div>
 </header>
 
-<section>
+<nav class="maintabs" id="maintabs" role="tablist" aria-label="학습 영역"></nav>
+
+<section data-tab="kana">
   <h2><span class="num">01</span>7일 진도표</h2>
   <p class="sub" id="sub01"></p>
   <div class="tabs" role="tablist" id="tabs"></div>
   <div id="dayPanel" role="tabpanel"></div>
 </section>
 
-<section>
+<section data-tab="kana">
   <h2><span class="num">02</span>헷갈리는 짝</h2>
   <p class="sub">고생의 90%는 여기서 나옵니다. 따로 외우면 계속 섞이니, 반드시 나란히 놓고 차이 한 가지만 잡으세요.</p>
   <div class="pairs" id="pairs"></div>
 </section>
 
-<section>
+<section data-tab="kana">
   <h2><span class="num">03</span>소리와 규칙</h2>
   <p class="sub">글자는 맞게 읽어도 소리가 틀리는 지점, 그리고 문자별로만 적용되는 규칙입니다.</p>
   <div class="notes" id="notes"></div>
 </section>
 
-<section>
-  <h2><span class="num">04</span>꺼내기 연습</h2>
+<section data-tab="drill">
+  <h2><span class="num">06</span>꺼내기 연습</h2>
   <p class="sub">글자를 보고 맞는 로마자를 고르세요. 키보드 <b>1~4</b>로도 됩니다. 틀린 글자는 뒤쪽에 다시 섞여 들어옵니다.</p>
   <div class="quiz">
     <div class="quizbar" id="quizbar"></div>
@@ -327,14 +471,56 @@ footer b{color:var(--ink);font-weight:500}
   </div>
 </section>
 
-<section id="secWords">
-  <h2><span class="num">05</span>이미 아는 단어로 확인</h2>
+<section id="secWords" data-tab="kana">
+  <h2><span class="num">04</span>이미 아는 단어로 확인</h2>
   <p class="sub">가타카나 단어의 절반은 영어입니다. 소리 내어 읽으면 뜻이 저절로 나옵니다.</p>
   <div class="words" id="words"></div>
 </section>
 
-<section>
-  <h2><span class="num">06</span>복습 간격</h2>
+<section data-tab="word">
+  <h2><span class="num">07</span>숫자와 세는 법</h2>
+  <p class="sub">가격, 인원, 개수, 층수 — 여행에서 숫자를 못 읽으면 아무것도 안 됩니다. <b>읽는 법이 두 개인 숫자</b>와 <b>소리가 변하는 자리</b>만 붉게 표시했습니다.</p>
+  <div class="vrules" id="nRules"></div>
+  <div id="nList"></div>
+</section>
+
+<section data-tab="word">
+  <h2><span class="num">08</span>때 — 시간 · 날짜 · 계절</h2>
+  <p class="sub">몇 시에 시작하고 몇 분 걸리는지, 며칠에 돌아가는지. 시간 관련 단어는 <b>예외가 몰려 있어서</b> 그것만 따로 외우면 나머지는 규칙적입니다.</p>
+  <div class="vrules" id="tRules"></div>
+  <div id="tList"></div>
+</section>
+
+<section data-tab="word">
+  <h2><span class="num">09</span>장소 — 층 · 방향 · 시설</h2>
+  <p class="sub">「몇 층이에요?」와 「직진해서 오른쪽」. 이 두 가지만 되면 건물 안에서도 길 위에서도 헤매지 않습니다.</p>
+  <div class="vrules" id="pRules"></div>
+  <div id="pList"></div>
+</section>
+
+<section data-tab="verb">
+  <h2><span class="num">10</span>꼭 외워야 할 동사 55</h2>
+  <p class="sub">글자를 읽어도 동사를 모르면 문장이 되지 않습니다. 낱개로 외우면 정작 말할 때 안 나오니, <b>같은 자리에서 같이 쓰는 것끼리 23개 세트</b>로 묶었습니다. 반대말은 반대말끼리, 순서가 있는 것은 순서대로. 동사 하나에 <b>사전형 · ます형 · て형</b>을 붙여 세 번 소리 내어 읽으세요.</p>
+  <div class="vrules" id="vrules"></div>
+  <div id="verbList"></div>
+</section>
+
+<section data-tab="talk">
+  <h2><span class="num">11</span>말이 트이는 순간</h2>
+  <p class="sub">동사를 외웠으면 이제 말을 걸 차례입니다. 일본에서 대화가 이어지는지는 문법이 아니라 <b>첫 마디와 맞장구</b>가 결정합니다. 빨간 문장은 <b>가장 효율 좋은 것</b> — 이것만 골라 외워도 됩니다.</p>
+  <div class="vrules" id="trules"></div>
+  <div id="talkList"></div>
+</section>
+
+<section data-tab="talk">
+  <h2><span class="num">12</span>문장 잇는 말</h2>
+  <p class="sub">단어를 알아도 문장이 뚝뚝 끊기면 대화가 되지 않습니다. <b>「그리고 · 그런데 · 하지만 · 그래서」</b>에 해당하는 말과, 말이 막혔을 때 시간을 버는 말까지 모았습니다.</p>
+  <div class="vrules" id="crules"></div>
+  <div id="conjList"></div>
+</section>
+
+<section data-tab="kana">
+  <h2><span class="num">05</span>복습 간격</h2>
   <p class="sub">새로 배운 날만 하면 사흘 뒤 절반이 사라집니다. 아래 간격으로 다시 꺼내면 남습니다.</p>
   <table>
     <thead><tr><th>날</th><th>새로 배우기 · 10분</th><th>다시 꺼내기 · 10분</th></tr></thead>
@@ -546,12 +732,42 @@ function setMode(id){
   [...modebar.children].forEach((c,i)=>c.setAttribute('aria-pressed',MODES[i].id===id));
   $('#sub01').innerHTML=COPY[id].sub;
   $('#foot').innerHTML=COPY[id].foot;
-  $('#secWords').hidden = (id==='h');
+  applyVisibility();
   selectDay(curDay);
   renderPairs();
   renderNotes();
   build();
 }
+
+/* ─────────── 메인 탭 ─────────── */
+const TABS = [
+  {id:'kana',  en:'KANA',  jp:'문자'},
+  {id:'drill', en:'DRILL', jp:'연습'},
+  {id:'word',  en:'WORDS', jp:'단어'},
+  {id:'verb',  en:'VERBS', jp:'동사'},
+  {id:'talk',  en:'TALK',  jp:'회화'}
+];
+let tab = 'kana';
+const mtabs = $('#maintabs');
+TABS.forEach(t=>{
+  const b=document.createElement('button');
+  b.className='mtab';b.setAttribute('role','tab');b.setAttribute('aria-selected',t.id===tab);
+  b.innerHTML=`${t.en}<b>${t.jp}</b>`;
+  b.onclick=()=>{ setTab(t.id); window.scrollTo(0,0); };
+  mtabs.appendChild(b);
+});
+
+function applyVisibility(){
+  document.querySelectorAll('section[data-tab]').forEach(sec=>{
+    let show = sec.dataset.tab === tab;
+    if(show && sec.id==='secWords' && mode==='h') show=false;
+    sec.hidden = !show;
+  });
+  [...mtabs.children].forEach((c,i)=>c.setAttribute('aria-selected',TABS[i].id===tab));
+  $('#modebar').style.display = (tab==='kana'||tab==='drill') ? '' : 'none';
+  $('#foot').hidden = (tab!=='kana');
+}
+function setTab(id){ tab=id; applyVisibility(); }
 
 /* ─────────── 진도표 ─────────── */
 const tabs = $('#tabs');
@@ -636,6 +852,515 @@ $('#words').innerHTML = WORDS.map(w=>
 
 $('#sched').innerHTML = SCHED.map(r=>
   `<tr><td class="d">${r[0]}</td><td>${r[1]}</td><td class="r">${r[2]}</td></tr>`).join('');
+
+
+/* ─────────── 동사 ───────────
+   V(한자표기, 읽는법, 뜻, 그룹, ます형, て형, 예문, 예문가나, 예문한글, 예문뜻, 예외여부) */
+const V = (j,r,m,g,masu,te,ej,ek,ep,em,ex=false)=>({j,r,m,g,masu,te,ej,ek,ep,em,ex});
+
+const VRULES = [
+  {n:'RULE 1', t:'동사는 세 그룹뿐',
+   p:'<b>1그룹(う동사)</b> — 사전형이 <span class="jp">う·く·す·つ·ぬ·ぶ·む·る</span>로 끝나는 대부분. <b>2그룹(る동사)</b> — <span class="jp">いる·える</span>로 끝나는 것. <b>3그룹</b> — <span class="jp">する</span>와 <span class="jp">来る</span> 딱 둘. 그룹만 정하면 나머지는 기계적으로 만들어집니다.'},
+  {n:'RULE 2', t:'ます형 — 정중체',
+   p:'<b>1그룹</b>은 끝의 う단을 <b>い단</b>으로 바꾸고 ます. <span class="jp">の<em>む</em>→の<em>み</em>ます</span><br><b>2그룹</b>은 る를 떼고 ます. <span class="jp">たべ<em>る</em>→たべます</span><br><b>3그룹</b>은 <span class="jp">します · きます</span>.'},
+  {n:'RULE 3', t:'て형 — 가장 중요',
+   p:'<b>1그룹</b>만 끝소리에 따라 갈립니다.<br><span class="jp">う·つ·る → <em>って</em></span> · <span class="jp">む·ぶ·ぬ → <em>んで</em></span><br><span class="jp">く → <em>いて</em></span> · <span class="jp">ぐ → <em>いで</em></span> · <span class="jp">す → <em>して</em></span><br><b>2그룹</b>은 る를 떼고 て, <b>3그룹</b>은 <span class="jp">して · きて</span>.'},
+  {n:'RULE 4', t:'て형 하나면 다 됩니다',
+   p:'<span class="jp">〜てください</span> 해주세요<br><span class="jp">〜ています</span> 하고 있습니다<br><span class="jp">〜てもいいですか</span> 해도 되나요<br><span class="jp">〜てから</span> 하고 나서<br>て형만 만들 줄 알면 이 네 문형이 전부 열립니다.'},
+  {n:'TRAP', t:'함정 세 개',
+   p:'① <span class="jp">行く</span>는 규칙대로면 <span class="jp">いいて</span>지만 <em>いって</em>가 정답.<br>② <span class="jp">帰る·入る·走る·知る</span>는 る로 끝나도 <b>1그룹</b>. <span class="jp">かえて(×) → <em>かえって</em>(○)</span><br>③ <span class="jp">着る(입다)</span>와 <span class="jp">来る(오다)</span>는 ます형이 둘 다 <span class="jp">きます</span>. 문맥으로 구별합니다.'},
+  {n:'TIP', t:'외우는 순서',
+   p:'단어장처럼 뜻만 외우면 말할 때 안 나옵니다. 반드시 <b>사전형 → ます형 → て형</b>을 소리 내어 세 번 연속으로. 그리고 <b>예문 한 줄</b>을 통째로. 동사는 문장 안에서만 기억에 남습니다.'}
+];
+
+const VERBS = [
+ {label:'뼈대 — 이 네 세트가 문장의 절반', sets:[
+  {n:'する <i>·</i> できる', tip:'명사 뒤에 <span class="jp">する</span>를 붙이면 그대로 동사가 되고, <span class="jp">できますか</span>로 바꾸면 그대로 질문이 됩니다. <span class="jp">予約する → 予約できますか</span>', items:[
+   V('する','','하다',3,'します','して','チェックインをします。','チェックインをします','첵쿠인오 시마스','체크인할게요.'),
+   V('できる','','할 수 있다',2,'できます','できて','ここで両替できますか。','ここでりょうがえできますか','코코데 료-가에 데키마스카','여기서 환전할 수 있나요?')]},
+  {n:'行く <i>·</i> 来る <i>·</i> 帰る', tip:'방향 삼총사. 나에게서 <b>멀어지면</b> 行く, <b>다가오면</b> 来る, <b>원래 자리로</b> 돌아가면 帰る. 셋 중 <span class="jp">行く</span>와 <span class="jp">帰る</span>가 て형 예외라 여기서 한 번에 처리하고 갑니다.', items:[
+   V('行く','いく','가다',1,'いきます','いって','渋谷に行きたいです。','しぶやにいきたいです','시부야니 이키타이데스','시부야에 가고 싶어요.',true),
+   V('来る','くる','오다',3,'きます','きて','バスはいつ来ますか。','バスはいつきますか','바스와 이츠 키마스카','버스는 언제 오나요?'),
+   V('帰る','かえる','돌아가다',1,'かえります','かえって','明日、韓国に帰ります。','あした、かんこくにかえります','아시타, 캉코쿠니 카에리마스','내일 한국으로 돌아갑니다.',true)]},
+  {n:'ある <i>·</i> いる', tip:'둘 다 「있다」인데, <b>물건은 ある</b>, <b>사람·동물은 いる</b>로 갈립니다. <span class="jp">〜はありますか</span>는 가게에서 가장 많이 쓰게 되는 문형입니다.', items:[
+   V('ある','','(사물이) 있다',1,'あります','あって','近くにコンビニはありますか。','ちかくにコンビニはありますか','치카쿠니 콤비니와 아리마스카','근처에 편의점 있나요?'),
+   V('いる','','(사람이) 있다',2,'います','いて','すみません、店員さんはいますか。','すみません、てんいんさんはいますか','스미마셍, 텡인상와 이마스카','저기요, 직원분 계세요?')]},
+  {n:'分かる <i>·</i> 知る', tip:'分かる는 <b>「머리로 이해된다」</b>, 知る는 <b>「정보를 갖고 있다」</b>. 말을 못 알아들으면 <span class="jp">分かりません</span>, 그 사실을 모르면 <span class="jp">知りません</span>.', items:[
+   V('分かる','わかる','알다 · 이해하다',1,'わかります','わかって','すみません、分かりません。','すみません、わかりません','스미마셍, 와카리마셍','죄송해요, 못 알아듣겠어요.'),
+   V('知る','しる','알다 · 알고 있다',1,'しります','しって','この店を知っていますか。','このみせをしっていますか','코노 미세오 싯테 이마스카','이 가게 아세요?',true)]}
+ ]},
+ {label:'이동 — 역 · 버스 · 길', sets:[
+  {n:'乗る <i>↔</i> 降りる', tip:'타고 내리기. <b>조사가 다릅니다</b> — <span class="jp">電車<em>に</em>乗る</span>, <span class="jp">電車<em>を</em>降りる</span>. 세트로 외워야 조사도 같이 붙습니다.', items:[
+   V('乗る','のる','타다',1,'のります','のって','どこで乗りますか。','どこでのりますか','도코데 노리마스카','어디서 타나요?'),
+   V('降りる','おりる','내리다',2,'おります','おりて','東京駅で降ります。','とうきょうえきでおります','토-쿄-에키데 오리마스','도쿄역에서 내립니다.')]},
+  {n:'入る <i>↔</i> 出る', tip:'들어가고 나가기. 나란히 두면 <b>예외가 눈에 띕니다</b> — 入る는 る로 끝나도 <em>1그룹(はいって)</em>, 出る는 얌전한 2그룹(でて).', items:[
+   V('入る','はいる','들어가다',1,'はいります','はいって','ここに入ってもいいですか。','ここにはいってもいいですか','코코니 하잇테모 이이데스카','여기 들어가도 되나요?',true),
+   V('出る','でる','나가다 · 출발하다',2,'でます','でて','この電車は何番線から出ますか。','このでんしゃはなんばんせんからでますか','코노 덴샤와 남반센카라 데마스카','이 전철은 몇 번 승강장에서 떠나나요?')]},
+  {n:'歩く <i>·</i> 曲がる <i>·</i> 渡る', tip:'길을 말할 때의 3종 세트. 택시 기사에게든 행인에게든 전부 <span class="jp">〜てください</span>로 붙습니다. <span class="jp">あるいて · まがって · わたって</span> — <b>て형만 통째로</b> 외우면 됩니다.', items:[
+   V('歩く','あるく','걷다',1,'あるきます','あるいて','駅まで歩いて何分ですか。','えきまであるいてなんぷんですか','에키마데 아루이테 남푼데스카','역까지 걸어서 몇 분인가요?'),
+   V('曲がる','まがる','돌다 · 꺾다',1,'まがります','まがって','次の角を右に曲がってください。','つぎのかどをみぎにまがってください','츠기노 카도오 미기니 마갓테 쿠다사이','다음 모퉁이에서 오른쪽으로 도세요.'),
+   V('渡る','わたる','건너다',1,'わたります','わたって','あの橋を渡ってください。','あのはしをわたってください','아노 하시오 와탓테 쿠다사이','저 다리를 건너주세요.')]}
+ ]},
+ {label:'시간 — 「何時に〜ますか」 하나로 끝', sets:[
+  {n:'着く <i>·</i> 始まる <i>·</i> 終わる', tip:'도착 시간, 시작 시간, 마감 시간. 앞에 붙는 말만 바꾸고 <b><span class="jp">何時に〜ますか</span> 틀은 그대로</b> 씁니다. 셋 다 1그룹이라 활용도 똑같이 굴러갑니다.', items:[
+   V('着く','つく','도착하다',1,'つきます','ついて','空港には何時に着きますか。','くうこうにはなんじにつきますか','쿠-코-니와 난지니 츠키마스카','공항에는 몇 시에 도착하나요?'),
+   V('始まる','はじまる','시작되다',1,'はじまります','はじまって','花火は何時に始まりますか。','はなびはなんじにはじまりますか','하나비와 난지니 하지마리마스카','불꽃놀이는 몇 시에 시작하나요?'),
+   V('終わる','おわる','끝나다',1,'おわります','おわって','お店は何時に終わりますか。','おみせはなんじにおわりますか','오미세와 난지니 오와리마스카','가게는 몇 시에 끝나나요?')]}
+ ]},
+ {label:'숙소 — 체크인부터 다음 날 아침까지', sets:[
+  {n:'泊まる <i>→</i> 休む <i>→</i> 寝る <i>→</i> 起きる', tip:'<b>일어나는 순서대로</b> 묶었습니다. 호텔에 묵고 → 좀 쉬고 → 자고 → 일어나기. 寝る·起きる는 2그룹이라 <span class="jp">る</span>만 떼면 끝이고, 泊まる·休む만 1그룹입니다.', items:[
+   V('泊まる','とまる','묵다',1,'とまります','とまって','このホテルに三日泊まります。','このホテルにみっかとまります','코노 호테루니 밋카 토마리마스','이 호텔에서 3일 묵습니다.'),
+   V('休む','やすむ','쉬다',1,'やすみます','やすんで','少し休みたいです。','すこしやすみたいです','스코시 야스미타이데스','잠깐 쉬고 싶어요.'),
+   V('寝る','ねる','자다',2,'ねます','ねて','今日は早く寝ます。','きょうははやくねます','쿄-와 하야쿠 네마스','오늘은 일찍 잘게요.'),
+   V('起きる','おきる','일어나다',2,'おきます','おきて','明日は五時に起きます。','あしたはごじにおきます','아시타와 고지니 오키마스','내일은 5시에 일어납니다.')]}
+ ]},
+ {label:'식당 — 앉아서 나올 때까지', sets:[
+  {n:'食べる <i>·</i> 飲む', tip:'뒤에 <span class="jp">〜たいです</span>만 붙이면 <b>그대로 주문</b>이 됩니다. <span class="jp">食べたい · 飲みたい</span>. 못 먹는 것이 있으면 <span class="jp">〜は食べられません</span>으로 뒤집습니다.', items:[
+   V('食べる','たべる','먹다',2,'たべます','たべて','刺身が食べたいです。','さしみがたべたいです','사시미가 타베타이데스','회를 먹고 싶어요.'),
+   V('飲む','のむ','마시다',1,'のみます','のんで','お酒は飲めません。','おさけはのめません','오사케와 노메마셍','술은 못 마셔요.')]},
+  {n:'決める <i>→</i> 頼む', tip:'메뉴판 앞의 두 마디. 아직이면 <span class="jp">まだ決めていません</span>, 정했으면 <span class="jp">これを頼みます</span>. 이 순서로 한 세트입니다.', items:[
+   V('決める','きめる','정하다',2,'きめます','きめて','まだ決めていません。','まだきめていません','마다 키메테 이마셍','아직 못 정했어요.'),
+   V('頼む','たのむ','주문하다 · 부탁하다',1,'たのみます','たのんで','同じものを頼みます。','おなじものをたのみます','오나지 모노오 타노미마스','같은 걸로 주문할게요.')]}
+ ]},
+ {label:'쇼핑 — 구경부터 계산까지', sets:[
+  {n:'見る <i>·</i> 着る', tip:'옷가게에서 쓰는 두 마디. 부담 없이 둘러볼 땐 <span class="jp">見ているだけです</span>, 마음에 들면 <span class="jp">着てみてもいいですか</span>. 둘 다 2그룹이라 <span class="jp">みて · きて</span>로 똑같이 만들어집니다.', items:[
+   V('見る','みる','보다',2,'みます','みて','ちょっと見ているだけです。','ちょっとみているだけです','촛토 미테 이루다케데스','그냥 구경만 하는 거예요.'),
+   V('着る','きる','(상의를) 입다',2,'きます','きて','これ、着てみてもいいですか。','これ、きてみてもいいですか','코레, 키테 미테모 이이데스카','이거 입어봐도 되나요?')]},
+  {n:'買う <i>→</i> 払う', tip:'계산대 세트. <span class="jp">買えますか</span>(살 수 있나요) 다음에 <span class="jp">払えますか</span>(낼 수 있나요) 순서로 갑니다. 둘 다 <span class="jp">う</span>로 끝나는 1그룹이라 て형이 <em>かって · はらって</em>로 나란합니다.', items:[
+   V('買う','かう','사다',1,'かいます','かって','お土産はどこで買えますか。','おみやげはどこでかえますか','오미야게와 도코데 카에마스카','기념품은 어디서 살 수 있나요?'),
+   V('払う','はらう','지불하다',1,'はらいます','はらって','カードで払えますか。','カードではらえますか','카-도데 하라에마스카','카드로 낼 수 있나요?')]},
+  {n:'入れる <i>·</i> 持つ', tip:'봉투에 <b>넣고</b>, 손에 <b>듭니다</b>. 持つ의 <span class="jp">持っています</span>는 「가지고 있다」로 소지품을 말할 때도 그대로 씁니다.', items:[
+   V('入れる','いれる','넣다',2,'いれます','いれて','袋に入れてください。','ふくろにいれてください','후쿠로니 이레테 쿠다사이','봉투에 넣어주세요.'),
+   V('持つ','もつ','들다 · 가지다',1,'もちます','もって','現金は持っていません。','げんきんはもっていません','겡킹와 못테 이마셍','현금은 없어요.')]},
+  {n:'使う <i>·</i> 作る', tip:'「이거 <b>써도</b> 되나요 / 이건 어디서 <b>만드나요</b>」. 使う는 여행 내내 가장 자주 나오는 부탁 동사입니다.', items:[
+   V('使う','つかう','쓰다 · 사용하다',1,'つかいます','つかって','Wi-Fiを使えますか。','ワイファイをつかえますか','와이화이오 츠카에마스카','와이파이 쓸 수 있나요?'),
+   V('作る','つくる','만들다',1,'つくります','つくって','これはどこで作っていますか。','これはどこでつくっていますか','코레와 도코데 츠쿳테 이마스카','이건 어디서 만드나요?')]}
+ ]},
+ {label:'말 걸기 — 입과 귀', sets:[
+  {n:'言う <i>·</i> 話す <i>·</i> 聞く <i>·</i> 教える', tip:'言う는 <b>한 마디를 뱉는 것</b>, 話す는 <b>대화하는 것</b>, 聞く는 <b>듣기와 묻기 둘 다</b>, 教える는 <b>알려주는 것</b>. 넷을 한 화면에 두면 헷갈릴 일이 없습니다.', items:[
+   V('言う','いう','말하다',1,'いいます','いって','もう一度言ってください。','もういちどいってください','모- 이치도 잇테 쿠다사이','한 번 더 말해주세요.'),
+   V('話す','はなす','이야기하다',1,'はなします','はなして','英語を話せますか。','えいごをはなせますか','에-고오 하나세마스카','영어 하실 수 있나요?'),
+   V('聞く','きく','듣다 · 묻다',1,'ききます','きいて','ちょっと聞いてもいいですか。','ちょっときいてもいいですか','촛토 키이테모 이이데스카','뭐 좀 여쭤봐도 될까요?'),
+   V('教える','おしえる','가르쳐주다 · 알려주다',2,'おしえます','おしえて','行き方を教えてください。','いきかたをおしえてください','이키카타오 오시에테 쿠다사이','가는 길 좀 알려주세요.')]},
+  {n:'読む <i>·</i> 書く', tip:'말이 안 통할 때의 마지막 수단. 못 읽겠으면 <span class="jp">読めません</span>, 대신 써 달라면 <span class="jp">書いてください</span>. 여행에서는 이 두 마디가 통역기입니다.', items:[
+   V('読む','よむ','읽다',1,'よみます','よんで','漢字が読めません。','かんじがよめません','칸지가 요메마셍','한자를 못 읽어요.'),
+   V('書く','かく','쓰다',1,'かきます','かいて','ここに住所を書いてください。','ここにじゅうしょをかいてください','코코니 쥬-쇼오 카이테 쿠다사이','여기에 주소를 써 주세요.')]},
+  {n:'待つ <i>·</i> 会う <i>·</i> 呼ぶ', tip:'사람을 <b>기다리고, 만나고, 부릅니다</b>. て형이 셋 다 다른 규칙이라 비교용으로도 좋습니다 — <span class="jp">つ→<em>まって</em></span>, <span class="jp">う→<em>あって</em></span>, <span class="jp">ぶ→<em>よんで</em></span>.', items:[
+   V('待つ','まつ','기다리다',1,'まちます','まって','ちょっと待ってください。','ちょっとまってください','촛토 맛테 쿠다사이','잠깐만 기다려주세요.'),
+   V('会う','あう','만나다',1,'あいます','あって','駅前で会いましょう。','えきまえであいましょう','에키마에데 아이마쇼-','역 앞에서 만나요.'),
+   V('呼ぶ','よぶ','부르다',1,'よびます','よんで','タクシーを呼んでください。','タクシーをよんでください','타쿠시-오 욘데 쿠다사이','택시를 불러주세요.')]}
+ ]},
+ {label:'몸짓 — 반대말로 두 개씩', sets:[
+  {n:'立つ <i>↔</i> 座る', tip:'서고 앉기. 사진 찍을 때, 빈자리를 물어볼 때. 둘 다 1그룹이고 <span class="jp">つ·る</span> → <em>って</em>로 て형이 같은 모양이 됩니다.', items:[
+   V('立つ','たつ','서다',1,'たちます','たって','そこに立ってください。','そこにたってください','소코니 탓테 쿠다사이','거기 서 주세요. (사진)'),
+   V('座る','すわる','앉다',1,'すわります','すわって','ここに座ってもいいですか。','ここにすわってもいいですか','코코니 스왓테모 이이데스카','여기 앉아도 되나요?')]},
+  {n:'開ける <i>↔</i> 閉める', tip:'열고 닫기. 둘 다 2그룹이라 <span class="jp">る</span>만 떼면 て형입니다. 전철 창문, 택시 문, 가게 문에 그대로 씁니다.', items:[
+   V('開ける','あける','열다',2,'あけます','あけて','窓を開けてもいいですか。','まどをあけてもいいですか','마도오 아케테모 이이데스카','창문 열어도 되나요?'),
+   V('閉める','しめる','닫다',2,'しめます','しめて','ドアを閉めてください。','ドアをしめてください','도아오 시메테 쿠다사이','문을 닫아주세요.')]},
+  {n:'撮る <i>·</i> 取る', tip:'발음이 <b>똑같이 とる</b>입니다. 사진은 <span class="jp">撮る</span>, 손으로 잡거나 예약을 잡는 건 <span class="jp">取る</span>. 한자만 다르고 활용은 완전히 같으니 <b>한 세트로</b> 넘기세요.', items:[
+   V('撮る','とる','(사진을) 찍다',1,'とります','とって','写真を撮ってもいいですか。','しゃしんをとってもいいですか','샤신오 톳테모 이이데스카','사진 찍어도 되나요?'),
+   V('取る','とる','집다 · 잡다',1,'とります','とって','ネットで予約を取りました。','ネットでよやくをとりました','넷토데 요야쿠오 토리마시타','인터넷으로 예약했습니다.')]}
+ ]},
+ {label:'곤란할 때 · 나에 대해', sets:[
+  {n:'覚える <i>→</i> 忘れる <i>→</i> 探す', tip:'뭔가 잃어버렸을 때의 <b>3연타</b>. <span class="jp">覚えていません</span>(기억이 안 나요) → <span class="jp">忘れました</span>(두고 왔어요) → <span class="jp">探しています</span>(찾고 있어요). 이 순서 그대로 말하면 상황 설명이 끝납니다.', items:[
+   V('覚える','おぼえる','외우다 · 기억하다',2,'おぼえます','おぼえて','ホテルの名前を覚えていません。','ホテルのなまえをおぼえていません','호테루노 나마에오 오보에테 이마셍','호텔 이름이 기억 안 나요.'),
+   V('忘れる','わすれる','잊다 · 두고 오다',2,'わすれます','わすれて','電車に傘を忘れました。','でんしゃにかさをわすれました','덴샤니 카사오 와스레마시타','전철에 우산을 두고 내렸어요.'),
+   V('探す','さがす','찾다',1,'さがします','さがして','この住所を探しています。','このじゅうしょをさがしています','코노 쥬-쇼오 사가시테 이마스','이 주소를 찾고 있어요.')]},
+  {n:'思う <i>·</i> 働く', tip:'내 얘기를 할 때. <span class="jp">〜と思います</span>로 <b>의견</b>을, <span class="jp">〜で働いています</span>로 <b>직업</b>을 말합니다. 가게에서 고를 때, 옆자리와 말이 트일 때 바로 나옵니다.', items:[
+   V('思う','おもう','생각하다',1,'おもいます','おもって','これがいいと思います。','これがいいとおもいます','코레가 이이토 오모이마스','이게 좋을 것 같아요.'),
+   V('働く','はたらく','일하다',1,'はたらきます','はたらいて','会社で働いています。','かいしゃではたらいています','카이샤데 하타라이테 이마스','회사에서 일하고 있어요.')]}
+ ]}
+];
+
+$('#vrules').innerHTML = VRULES.map(r=>
+  `<div class="vrule"><div class="t"><i>${r.n}</i>${r.t}</div><p>${r.p}</p></div>`).join('');
+
+function verbCard(v){
+  const grp = v.ex
+    ? `<span class="vgrp ex">${v.g} · 예외</span>`
+    : `<span class="vgrp">${v.g}그룹</span>`;
+  const te = v.ex ? `<em>${v.te}</em>` : v.te;
+  const rd = v.r ? `<span class="vr">${v.r}</span>` : '';
+  return `<div class="verb">${grp}
+    <div class="vhead"><span class="vj">${v.j}</span>${rd}</div>
+    <div class="vm">${v.m}</div>
+    <div class="vconj">
+      <div><span class="l">MASU</span><span class="v">${v.masu}</span></div>
+      <div><span class="l">TE</span><span class="v">${te}</span></div>
+    </div>
+    <div class="vex">
+      <span class="ej">${v.ej}</span>
+      <span class="er"><span class="kn">${v.ek}</span><span class="sl">·</span>${v.ep}</span>
+      <span class="ek">${v.em}</span>
+    </div></div>`;
+}
+
+$('#verbList').innerHTML = VERBS.map(sec=>{
+  const sets = sec.sets.map(st=>
+    `<div class="vset">
+       <div class="vsethead"><div class="n">${st.n}</div><div class="tp">${st.tip}</div></div>
+       <div class="verbs">${st.items.map(verbCard).join('')}</div>
+     </div>`).join('');
+  return `<div class="rowlabel">${sec.label}</div>${sets}`;
+}).join('');
+
+/* ─────────── 아이스브레이킹 ───────────
+   T(문장, 가나, 한글, 뜻, 쓰는 법, 강조) */
+const T = (j,k,p,m,n='',star=false)=>({j,k,p,m,n,star});
+
+const KRULES = [
+  {n:'RULE 1', t:'맞장구가 절반입니다',
+   p:'일본어 대화는 말하는 사람보다 <b>듣는 사람이 더 바쁩니다</b>. <span class="jp">そうなんですか · なるほど · すごいですね</span> 세 개를 몇 초마다 던지면, 문법이 틀려도 대화는 굴러갑니다. 조용히 듣고만 있으면 <b>「관심 없구나」</b>로 읽힙니다.'},
+  {n:'RULE 2', t:'ね 와 よ',
+   p:'문장 끝의 <span class="jp">ね</span>는 <b>「같이 느끼자」</b>(공감), <span class="jp">よ</span>는 <b>「알려줄게」</b>(정보). 같이 먹는 사람에게는 <span class="jp">おいしいです<em>ね</em></span>, 아직 안 먹어본 사람에게는 <span class="jp">おいしいです<em>よ</em></span>. 이 하나로 말투가 완전히 달라집니다.'},
+  {n:'TIP 1', t:'먼저 밝히고 시작하기',
+   p:'<span class="jp">日本語が下手ですみません</span> 한 마디를 <b>맨 앞에</b> 던지세요. 상대가 속도를 늦추고 쉬운 말로 바꿔줍니다. 여행 회화에서 <b>가성비가 가장 높은 문장</b>입니다.'},
+  {n:'TIP 2', t:'질문 틀은 세 개면 충분',
+   p:'<span class="jp">〜はありますか</span>(있나요) · <span class="jp">〜てもいいですか</span>(해도 되나요) · <span class="jp">〜は何ですか</span>(뭔가요). 이 세 틀에 <b>단어만 갈아 끼우면</b> 여행 중 궁금한 건 거의 다 물어봅니다.'}
+];
+
+const TALKS = [
+ {label:'첫 마디 — 입을 떼는 순간', items:[
+  T('すみません、ちょっといいですか。','','스미마셍, 촛토 이이데스카','저기요, 잠깐 괜찮을까요?','<span class="jp">すみません</span> 하나로도 충분하지만, 뒤를 붙이면 <b>말을 걸겠다는 신호</b>가 분명해집니다.'),
+  T('日本語が下手ですみません。','にほんごがへたですみません','니홍고가 헤타데 스미마셍','일본어가 서툴러서 죄송해요.','<b>가장 먼저 던질 문장.</b> 이 한 마디에 상대의 말 속도가 눈에 띄게 느려집니다.',true),
+  T('ゆっくり話してもらえますか。','ゆっくりはなしてもらえますか','육쿠리 하나시테 모라에마스카','천천히 말씀해 주실 수 있나요?','못 알아들었을 때 <span class="jp">分かりません</span>보다 이쪽이 <b>대화를 이어줍니다.</b>',true),
+  T('韓国から来ました。','かんこくからきました','캉코쿠카라 키마시타','한국에서 왔어요.','대화의 8할이 여기서 시작됩니다. 이 뒤에 거의 항상 질문이 돌아옵니다.',true),
+  T('初めて日本に来ました。','はじめてにほんにきました','하지메테 니혼니 키마시타','일본은 처음이에요.','상대가 자동으로 <b>추천과 설명 모드</b>로 들어갑니다.'),
+  T('少しだけ日本語が分かります。','すこしだけにほんごがわかります','스코시다케 니홍고가 와카리마스','일본어 조금만 알아요.','「전혀 못한다」고 하면 대화가 끊깁니다. <b>「조금」</b>이 딱 좋습니다.')
+ ]},
+ {label:'상대에게 묻기 — 이야기를 여는 질문', items:[
+  T('お名前は何ですか。','おなまえはなんですか','오나마에와 난데스카','성함이 어떻게 되세요?','이자카야 카운터나 게스트하우스에서. 이름을 주고받으면 분위기가 바뀝니다.'),
+  T('韓国に行ったことがありますか。','かんこくにいったことがありますか','캉코쿠니 잇타 코토가 아리마스카','한국에 가보신 적 있어요?','<b>거의 실패하지 않는 질문.</b> 가봤으면 그 얘기로, 안 가봤으면 「가고 싶다」로 이어집니다.',true),
+  T('何かおすすめはありますか。','なにかおすすめはありますか','나니카 오스스메와 아리마스카','뭐 추천해 주실 거 있어요?','가게에서 이 한마디면 주인이 <b>신나서 설명</b>합니다. 메뉴 고민도 같이 끝납니다.',true),
+  T('地元の人は何を食べますか。','じもとのひとはなにをたべますか','지모토노 히토와 나니오 타베마스카','현지분들은 뭘 드세요?','관광객용 메뉴 말고 <b>진짜</b>를 알려줍니다.'),
+  T('この辺でおいしい店はありますか。','このへんでおいしいみせはありますか','코노 헨데 오이시이 미세와 아리마스카','이 근처에 맛있는 가게 있어요?','택시 기사, 편의점 직원, 호텔 프런트 누구에게 물어도 됩니다.'),
+  T('お仕事は何ですか。','おしごとはなんですか','오시고토와 난데스카','무슨 일 하세요?','조금 친해진 다음에. 처음부터 던지면 어색합니다.')
+ ]},
+ {label:'맞장구 — 외울 게 이것뿐이라면 여기', items:[
+  T('そうなんですか。','','소-난데스카','그렇군요.','<b>1순위 맞장구.</b> 뜻을 몰라도 일단 이걸 던지면 대화가 이어집니다.',true),
+  T('なるほど。','','나루호도','아, 그렇구나.','설명을 듣고 납득했을 때. 고개를 끄덕이며.',true),
+  T('すごいですね。','','스고이데스네','대단하네요.','상대의 이야기·솜씨·가게 무엇에든 씁니다.'),
+  T('本当ですか。','ほんとうですか','혼토-데스카','정말요?','놀랐을 때. 살짝 올려서 말하면 리액션이 삽니다.'),
+  T('いいですね。','','이이데스네','좋네요.','제안을 받았을 때의 기본 응답.'),
+  T('おいしいです！','','오이시이데스','맛있어요!','<b>먹자마자, 크게.</b> 주방까지 들리게 말하면 분위기가 완전히 달라집니다.',true),
+  T('分かります。','わかります','와카리마스','무슨 말인지 알아요.','공감할 때. <span class="jp">分かりました</span>(알겠습니다)와는 쓰임이 다릅니다.'),
+  T('えっ、そうですか。','','엣, 소-데스카','어, 그래요?','예상 밖의 이야기에. <span class="jp">えっ</span>은 짧게 끊어서.')
+ ]},
+ {label:'호감 표현 — 한 걸음 더', items:[
+  T('この店、すごくいいですね。','このみせ、すごくいいですね','코노 미세, 스고쿠 이이데스네','이 가게 정말 좋네요.','주인이 있는 작은 가게에서. 대화가 여기서부터 시작되는 일이 많습니다.'),
+  T('日本語を勉強しています。','にほんごをべんきょうしています','니홍고오 벵쿄- 시테 이마스','일본어 공부하고 있어요.','서툰 일본어가 <b>실례가 아니라 노력</b>으로 읽힙니다.',true),
+  T('写真、一緒に撮ってもいいですか。','しゃしん、いっしょにとってもいいですか','샤신, 잇쇼니 톳테모 이이데스카','사진 같이 찍어도 될까요?','친해진 뒤 마지막에. <span class="jp">〜てもいいですか</span> 틀 그대로입니다.'),
+  T('また来ます。','またきます','마타 키마스','또 올게요.','가게를 나서며. 빈말이어도 좋아합니다.'),
+  T('韓国にも来てください。','かんこくにもきてください','캉코쿠니모 키테 쿠다사이','한국에도 오세요.','대화를 기분 좋게 닫는 한 마디.')
+ ]},
+ {label:'마무리 — 자리를 뜰 때', items:[
+  T('ごちそうさまでした。','','고치소-사마데시타','잘 먹었습니다.','<b>식당을 나설 때 이 한 마디.</b> 계산만 하고 나가는 손님과 완전히 다르게 봅니다.',true),
+  T('楽しかったです。','たのしかったです','타노시캇타데스','즐거웠어요.','사람과 헤어질 때. 짧지만 확실합니다.'),
+  T('ありがとうございました。','','아리가토- 고자이마시타','감사했습니다.','<b>과거형</b>이 「끝난 일」에 대한 인사입니다. 나갈 때는 <span class="jp">ました</span>.'),
+  T('お世話になりました。','おせわになりました','오세와니 나리마시타','신세 많이 졌습니다.','숙소 체크아웃할 때. 며칠 묵었다면 이쪽이 훨씬 자연스럽습니다.'),
+  T('お元気で。','おげんきで','오겡키데','건강하세요.','다시 못 볼 사람에게. 여운이 남는 마지막 인사.')
+ ]}
+];
+
+$('#trules').innerHTML = KRULES.map(r=>
+  `<div class="vrule"><div class="t"><i>${r.n}</i>${r.t}</div><p>${r.p}</p></div>`).join('');
+
+$('#talkList').innerHTML = TALKS.map(sec=>{
+  const cards = sec.items.map(t=>{
+    const rd = t.k
+      ? `<span class="tr"><span class="kn">${t.k}</span><span class="sl">·</span>${t.p}</span>`
+      : `<span class="tr">${t.p}</span>`;
+    const note = t.n ? `<span class="tn">${t.n}</span>` : '';
+    return `<div class="talk${t.star?' star':''}">
+      <span class="tj">${t.j}</span>${rd}
+      <span class="tk">${t.m}</span>${note}</div>`;
+  }).join('');
+  return `<div class="rowlabel">${sec.label}</div><div class="talks">${cards}</div>`;
+}).join('');
+
+/* ─────────── 생활 단어 ───────────
+   W(표기, 읽는법, 한글, 뜻, 주의)  X(예문, 가나, 한글, 뜻) */
+const W = (w,r,p,m,warn=false)=>({w,r,p,m,warn});
+const X = (j,k,p,m)=>({j,k,p,m});
+
+const NRULES = [
+  {n:'RULE 1', t:'4 · 7 · 9는 읽는 법이 두 개',
+   p:'<span class="jp">四 = よん / し</span>, <span class="jp">七 = なな / しち</span>, <span class="jp">九 = きゅう / く</span>. 어느 쪽을 쓸지는 뒤에 붙는 말이 정합니다. 헷갈리면 <b>よん · なな · きゅう</b> 쪽이 안전합니다. 단 시간만은 <em>4時 よじ</em>, <em>9時 くじ</em>로 고정.'},
+  {n:'RULE 2', t:'〜つ 하나면 웬만한 건 셉니다',
+   p:'일본어는 세는 물건마다 단위가 다르지만, <span class="jp">ひとつ · ふたつ · みっつ</span>는 <b>거의 모든 것에</b> 씁니다. 단위가 기억 안 나면 손가락으로 가리키며 <span class="jp">ふたつ、ください</span>면 끝납니다.'},
+  {n:'RULE 3', t:'1 · 6 · 8 · 10 뒤에서 소리가 바뀝니다',
+   p:'<span class="jp">一階 いっかい</span> · <span class="jp">六本 ろっぽん</span> · <span class="jp">十分 じゅっぷん</span>. 규칙을 통째로 외우려 들면 지칩니다. <b>자주 쓰는 것만</b> 소리째로 외우세요 — 이 표에 붉게 칠해뒀습니다.'},
+  {n:'TIP', t:'가격은 千과 万만 알면 됩니다',
+   p:'<span class="jp">3,500円 = さんぜんごひゃくえん</span>. <span class="jp">千(せん)</span>과 <span class="jp">万(まん)</span> 둘이면 값은 다 읽힙니다. 그래도 안 들리면 <span class="jp">書いてください</span>로 <b>써 달라고</b> 하면 됩니다.'}
+];
+
+const NLIST = [
+ {label:'1 ~ 10', items:[
+  W('一','いち','이치','1'), W('二','に','니','2'), W('三','さん','상','3'),
+  W('四','よん · し','욘 · 시','4',true), W('五','ご','고','5'), W('六','ろく','로쿠','6'),
+  W('七','なな · しち','나나 · 시치','7',true), W('八','はち','하치','8'),
+  W('九','きゅう · く','큐- · 쿠','9',true), W('十','じゅう','쥬-','10')],
+  ex:[
+  X('二人です。','ふたりです','후타리데스','두 명이에요.'),
+  X('三番出口はどこですか。','さんばんでぐちはどこですか','삼반 데구치와 도코데스카','3번 출구는 어디예요?')]},
+ {label:'백 · 천 · 만 — 소리가 변하는 자리', items:[
+  W('二十','にじゅう','니쥬-','20'), W('百','ひゃく','햐쿠','100'),
+  W('三百','さんびゃく','삼뱌쿠','300',true), W('六百','ろっぴゃく','롭퍄쿠','600',true),
+  W('八百','はっぴゃく','합퍄쿠','800',true), W('千','せん','셍','1,000'),
+  W('三千','さんぜん','산젱','3,000',true), W('八千','はっせん','핫셍','8,000',true),
+  W('一万','いちまん','이치망','10,000')],
+  ex:[
+  X('これ、いくらですか。','これ、いくらですか','코레, 이쿠라데스카','이거 얼마예요?'),
+  X('三千五百円です。','さんぜんごひゃくえんです','산젱 고햐쿠엔데스','3,500엔입니다.')]},
+ {label:'〜つ — 물건 세기 (이것만 알아도 됩니다)', items:[
+  W('一つ','ひとつ','히토츠','하나'), W('二つ','ふたつ','후타츠','둘'),
+  W('三つ','みっつ','밋츠','셋'), W('四つ','よっつ','욧츠','넷'),
+  W('五つ','いつつ','이츠츠','다섯'), W('六つ','むっつ','뭇츠','여섯'),
+  W('七つ','ななつ','나나츠','일곱'), W('八つ','やっつ','얏츠','여덟'),
+  W('九つ','ここのつ','코코노츠','아홉'), W('十','とお','토-','열')],
+  ex:[
+  X('これを二つください。','これをふたつください','코레오 후타츠 쿠다사이','이거 두 개 주세요.'),
+  X('一つでいいです。','ひとつでいいです','히토츠데 이이데스','하나면 돼요.')]},
+ {label:'자주 쓰는 세는 말', items:[
+  W('一人','ひとり','히토리','한 명',true), W('二人','ふたり','후타리','두 명',true),
+  W('三人','さんにん','산닝','세 명'), W('〜名','めい','메-','명 (예약)'),
+  W('〜枚','まい','마이','장 (표 · 종이)'), W('〜本','ほん','홍','병 · 긴 것'),
+  W('〜個','こ','코','개 (작은 것)'), W('〜杯','はい','하이','잔'),
+  W('〜泊','はく','하쿠','박 (숙박)'), W('〜時間','じかん','지캉','시간'),
+  W('〜円','えん','엥','엔')],
+  ex:[
+  X('大人二人、子供一人です。','おとなふたり、こどもひとりです','오토나 후타리, 코도모 히토리데스','어른 둘, 아이 하나예요.'),
+  X('ビールを二杯お願いします。','ビールをにはいおねがいします','비-루오 니하이 오네가이시마스','맥주 두 잔 부탁합니다.'),
+  X('二泊三日です。','にはくみっかです','니하쿠 밋카데스','2박 3일이에요.')]}
+];
+
+const TRULES = [
+  {n:'RULE 1', t:'時는 예외가 셋뿐',
+   p:'<span class="jp"><em>4時 よじ</em></span> · <span class="jp"><em>7時 しちじ</em></span> · <span class="jp"><em>9時 くじ</em></span>. 나머지는 숫자 그대로 <span class="jp">+ じ</span>입니다. <b>이 셋만</b> 따로 외우면 시간은 끝납니다.'},
+  {n:'RULE 2', t:'分은 ぷん으로 자주 바뀝니다',
+   p:'<span class="jp">1分 いっぷん</span> · <span class="jp">3分 さんぷん</span> · <span class="jp">6分 ろっぷん</span> · <span class="jp">8分 はっぷん</span> · <span class="jp">10分 じゅっぷん</span>. 「몇 분?」은 <span class="jp"><em>なんぷん</em></span>. <span class="jp">ふん</span>이 아니라 <b>ぷん</b>이라는 것만 기억하세요.'},
+  {n:'RULE 3', t:'며칠은 1~10일이 통째로 다릅니다',
+   p:'<span class="jp">1日 ついたち</span> · <span class="jp">2日 ふつか</span> · <span class="jp">4日 よっか</span> · <span class="jp">20日 はつか</span>. 숫자 읽기와 <b>전혀 다른 말</b>이라 날짜만 따로 외웁니다. 11일부터는 <span class="jp">숫자 + にち</span>로 규칙적입니다.'},
+  {n:'TIP', t:'「반」은 半(はん)',
+   p:'<span class="jp">2時半 にじはん</span> = 2시 반. 약속 시간에 가장 많이 쓰는 한 글자입니다. <span class="jp">〜時半に会いましょう</span>면 약속이 잡힙니다.'}
+];
+
+const TLIST = [
+ {label:'몇 시 — 時', items:[
+  W('何時','なんじ','난지','몇 시'), W('一時','いちじ','이치지','1시'),
+  W('四時','よじ','요지','4시',true), W('七時','しちじ','시치지','7시',true),
+  W('九時','くじ','쿠지','9시',true), W('半','はん','항','반 (30분)'),
+  W('午前','ごぜん','고젱','오전'), W('午後','ごご','고고','오후')],
+  ex:[
+  X('今、何時ですか。','いま、なんじですか','이마, 난지데스카','지금 몇 시예요?'),
+  X('九時半に出ます。','くじはんにでます','쿠지한니 데마스','9시 반에 나갑니다.')]},
+ {label:'몇 분 — 分', items:[
+  W('何分','なんぷん','남푼','몇 분',true), W('一分','いっぷん','입푼','1분',true),
+  W('三分','さんぷん','삼푼','3분',true), W('五分','ごふん','고훈','5분'),
+  W('十分','じゅっぷん','쥽푼','10분',true), W('三十分','さんじゅっぷん','산쥽푼','30분',true)],
+  ex:[
+  X('駅まで何分かかりますか。','えきまでなんぷんかかりますか','에키마데 남푼 카카리마스카','역까지 몇 분 걸려요?'),
+  X('十分ぐらいです。','じゅっぷんぐらいです','쥽푼 구라이데스','10분 정도예요.')]},
+ {label:'오늘 · 내일 · 하루의 때', items:[
+  W('今日','きょう','쿄-','오늘'), W('明日','あした','아시타','내일'),
+  W('昨日','きのう','키노-','어제'), W('明後日','あさって','아삿테','모레',true),
+  W('毎日','まいにち','마이니치','매일'), W('今週','こんしゅう','콘슈-','이번 주'),
+  W('来週','らいしゅう','라이슈-','다음 주'), W('週末','しゅうまつ','슈-마츠','주말'),
+  W('朝','あさ','아사','아침'), W('昼','ひる','히루','낮 · 점심'), W('夜','よる','요루','밤')],
+  ex:[
+  X('明日の朝、出ます。','あしたのあさ、でます','아시타노 아사, 데마스','내일 아침에 나갑니다.'),
+  X('週末は混みますか。','しゅうまつはこみますか','슈-마츠와 코미마스카','주말은 붐비나요?')]},
+ {label:'요일 — 曜日', items:[
+  W('何曜日','なんようび','낭요-비','무슨 요일'), W('月曜日','げつようび','게츠요-비','월요일'),
+  W('火曜日','かようび','카요-비','화요일'), W('水曜日','すいようび','스이요-비','수요일'),
+  W('木曜日','もくようび','모쿠요-비','목요일'), W('金曜日','きんようび','킹요-비','금요일'),
+  W('土曜日','どようび','도요-비','토요일'), W('日曜日','にちようび','니치요-비','일요일')],
+  ex:[
+  X('何曜日が休みですか。','なんようびがやすみですか','낭요-비가 야스미데스카','무슨 요일이 쉬는 날이에요?')]},
+ {label:'며칠 — 日 (1~10일은 통째로)', items:[
+  W('何日','なんにち','난니치','며칠'), W('一日','ついたち','츠이타치','1일',true),
+  W('二日','ふつか','후츠카','2일',true), W('三日','みっか','밋카','3일'),
+  W('四日','よっか','욧카','4일',true), W('五日','いつか','이츠카','5일'),
+  W('八日','ようか','요-카','8일',true), W('十日','とおか','토-카','10일'),
+  W('二十日','はつか','하츠카','20일',true)],
+  ex:[
+  X('二十日に帰ります。','はつかにかえります','하츠카니 카에리마스','20일에 돌아갑니다.'),
+  X('三日から五日まで泊まります。','みっかからいつかまでとまります','밋카카라 이츠카마데 토마리마스','3일부터 5일까지 묵어요.')]},
+ {label:'계절과 그때의 말', items:[
+  W('春','はる','하루','봄'), W('夏','なつ','나츠','여름'),
+  W('秋','あき','아키','가을'), W('冬','ふゆ','후유','겨울'),
+  W('桜','さくら','사쿠라','벚꽃'), W('梅雨','つゆ','츠유','장마',true),
+  W('紅葉','こうよう','코-요-','단풍'), W('花火','はなび','하나비','불꽃놀이'),
+  W('雪','ゆき','유키','눈'), W('暑い','あつい','아츠이','덥다'),
+  W('寒い','さむい','사무이','춥다'), W('涼しい','すずしい','스즈시-','선선하다')],
+  ex:[
+  X('今日は暑いですね。','きょうはあついですね','쿄-와 아츠이데스네','오늘 덥네요.'),
+  X('秋の紅葉がきれいですね。','あきのこうようがきれいですね','아키노 코-요-가 키레이데스네','가을 단풍이 예쁘네요.')]}
+];
+
+const PRULES = [
+  {n:'RULE 1', t:'층은 3階만 조심하면 됩니다',
+   p:'대부분 <span class="jp">숫자 + かい</span>인데 <span class="jp"><em>3階 さんがい</em></span>만 탁음이 붙습니다. <span class="jp">1階 いっかい</span> · <span class="jp">6階 ろっかい</span> · <span class="jp">10階 じゅっかい</span>도 소리가 바뀝니다. 「몇 층?」은 <span class="jp"><em>なんがい</em></span>.'},
+  {n:'RULE 2', t:'지하는 B가 아니라 地下(ちか)',
+   p:'백화점 식품관은 대개 <span class="jp">地下一階(ちかいっかい)</span>, 줄여서 <span class="jp">デパ地下</span>라고 부릅니다. 표지판에는 B1으로도 쓰지만 <b>말할 때는 ちか</b>입니다.'},
+  {n:'TIP 1', t:'방향은 네 개면 충분',
+   p:'<span class="jp">右(みぎ)</span> · <span class="jp">左(ひだり)</span> · <span class="jp">まっすぐ</span> · <span class="jp">この辺(へん)</span>. 택시에서든 길에서든 이 넷에 <span class="jp">〜てください</span>만 붙이면 안내가 끝납니다.'},
+  {n:'TIP 2', t:'표지판은 소리를 몰라도 됩니다',
+   p:'<span class="jp">出口 · 入口 · 改札 · 非常口</span>. 읽는 법을 몰라도 <b>글자만 알아보면</b> 역에서 길을 잃지 않습니다. 한자 모양만 눈에 익혀두세요.'}
+];
+
+const PLIST = [
+ {label:'층 — 階', items:[
+  W('何階','なんがい','낭가이','몇 층',true), W('一階','いっかい','익카이','1층',true),
+  W('二階','にかい','니카이','2층'), W('三階','さんがい','상가이','3층',true),
+  W('四階','よんかい','용카이','4층'), W('六階','ろっかい','록카이','6층',true),
+  W('十階','じゅっかい','쥭카이','10층',true), W('地下','ちか','치카','지하'),
+  W('屋上','おくじょう','오쿠죠-','옥상')],
+  ex:[
+  X('トイレは何階ですか。','トイレはなんがいですか','토이레와 낭가이데스카','화장실은 몇 층이에요?'),
+  X('地下一階です。','ちかいっかいです','치카 익카이데스','지하 1층입니다.')]},
+ {label:'방향과 위치', items:[
+  W('右','みぎ','미기','오른쪽'), W('左','ひだり','히다리','왼쪽'),
+  W('まっすぐ','','맛스구','직진'), W('前','まえ','마에','앞'),
+  W('後ろ','うしろ','우시로','뒤'), W('上','うえ','우에','위'),
+  W('下','した','시타','아래'), W('中','なか','나카','안'),
+  W('隣','となり','토나리','옆'), W('向かい','むかい','무카이','맞은편'),
+  W('近く','ちかく','치카쿠','근처'), W('この辺','このへん','코노 헨','이 근처')],
+  ex:[
+  X('まっすぐ行って、右です。','まっすぐいって、みぎです','맛스구 잇테, 미기데스','직진해서 오른쪽이에요.'),
+  X('コンビニの隣です。','コンビニのとなりです','콤비니노 토나리데스','편의점 옆이에요.')]},
+ {label:'시설 · 표지판', items:[
+  W('駅','えき','에키','역'), W('出口','でぐち','데구치','출구'),
+  W('入口','いりぐち','이리구치','입구'), W('改札','かいさつ','카이사츠','개찰구'),
+  W('ホーム','','호-무','승강장'), W('空港','くうこう','쿠-코-','공항'),
+  W('病院','びょういん','뵤-잉','병원'), W('薬局','やっきょく','약쿄쿠','약국'),
+  W('銀行','ぎんこう','깅코-','은행'), W('郵便局','ゆうびんきょく','유-빙쿄쿠','우체국'),
+  W('非常口','ひじょうぐち','히죠-구치','비상구'), W('お手洗い','おてあらい','오테아라이','화장실'),
+  W('コインロッカー','','코인록카-','코인 로커'), W('エレベーター','','에레베-타-','엘리베이터')],
+  ex:[
+  X('東口はどこですか。','ひがしぐちはどこですか','히가시구치와 도코데스카','동쪽 출구는 어디예요?'),
+  X('コインロッカーはありますか。','コインロッカーはありますか','코인록카-와 아리마스카','코인 로커 있나요?')]},
+ {label:'돈 · 계산', items:[
+  W('いくら','','이쿠라','얼마'), W('円','えん','엥','엔'),
+  W('値段','ねだん','네당','가격'), W('安い','やすい','야스이','싸다'),
+  W('高い','たかい','타카이','비싸다'), W('現金','げんきん','겡킹','현금'),
+  W('お釣り','おつり','오츠리','거스름돈'), W('領収書','りょうしゅうしょ','료-슈-쇼','영수증'),
+  W('レジ','','레지','계산대'), W('会計','かいけい','카이케-','계산'),
+  W('税込','ぜいこみ','제-코미','세금 포함'), W('別々','べつべつ','베츠베츠','따로따로')],
+  ex:[
+  X('お会計、別々でお願いします。','おかいけい、べつべつでおねがいします','오카이케-, 베츠베츠데 오네가이시마스','계산 따로따로 부탁합니다.'),
+  X('領収書をください。','りょうしゅうしょをください','료-슈-쇼오 쿠다사이','영수증 주세요.')]}
+];
+
+function ruleHTML(list){
+  return list.map(r=>`<div class="vrule"><div class="t"><i>${r.n}</i>${r.t}</div><p>${r.p}</p></div>`).join('');
+}
+function vocabHTML(list){
+  return list.map(g=>{
+    const cells = g.items.map(w=>
+      `<div class="vc${w.warn?' warn':''}"><span class="w">${w.w}</span>
+        ${w.r?`<span class="r">${w.r}</span>`:''}<span class="p">${w.p}</span>
+        <span class="m">${w.m}</span></div>`).join('');
+    const exs = g.ex.map(x=>
+      `<div class="exc"><div class="vex">
+        <span class="ej">${x.j}</span>
+        <span class="er"><span class="kn">${x.k}</span><span class="sl">·</span>${x.p}</span>
+        <span class="ek">${x.m}</span></div></div>`).join('');
+    return `<div class="rowlabel">${g.label}</div><div class="vocab">${cells}</div><div class="exs">${exs}</div>`;
+  }).join('');
+}
+
+$('#nRules').innerHTML = ruleHTML(NRULES);  $('#nList').innerHTML = vocabHTML(NLIST);
+$('#tRules').innerHTML = ruleHTML(TRULES);  $('#tList').innerHTML = vocabHTML(TLIST);
+$('#pRules').innerHTML = ruleHTML(PRULES);  $('#pList').innerHTML = vocabHTML(PLIST);
+
+/* ─────────── 이어주는 말 ───────────
+   C(말, 발음, 뜻, 설명, 예문, 예문가나, 예문한글, 예문뜻, 강조) */
+const C = (w,p,m,n,ej,ek,ep,em,star=false)=>({w,p,m,n,ej,ek,ep,em,star});
+
+const CRULES = [
+  {n:'RULE 1', t:'앞에 놓기 · 뒤에 붙이기',
+   p:'일본어의 연결은 두 갈래입니다. 문장을 <b>끊고 맨 앞에</b> 놓는 것(<span class="jp">でも · だから · それから</span>)과, <b>문장 끝에 붙여</b> 잇는 것(<span class="jp">〜けど · 〜ので · 〜が</span>). 회화에서는 <em>앞에 놓는 쪽</em>이 압도적으로 쉽습니다. 문장을 짧게 끊고 그 앞에 한 단어만 얹으세요.'},
+  {n:'RULE 2', t:'말할 때와 쓸 때가 다릅니다',
+   p:'뜻이 같아도 자리가 다릅니다. <b>말할 때</b>는 <span class="jp">でも · だから · けど</span>, <b>글에서</b>는 <span class="jp">しかし · が · したがって</span>. 여행 중에 <span class="jp">しかし</span>를 쓰면 뉴스 앵커처럼 들립니다.'},
+  {n:'TRAP', t:'「그런데」가 두 개입니다',
+   p:'한국어 <b>「그런데」</b>는 일본어에서 둘로 갈립니다. 앞말을 뒤집는 역접이면 <span class="jp"><em>でも</em></span>, 화제를 바꾸는 「그건 그렇고」면 <span class="jp"><em>ところで</em></span>. 이걸 섞으면 상대가 이야기를 잘못 따라옵니다.'},
+  {n:'TIP', t:'〜けど로 말끝 흐리기',
+   p:'문장 끝에 <span class="jp">〜けど</span>만 붙이면 「~인데요…」가 되어 <b>부탁도 거절도 부드러워집니다</b>. <span class="jp">予約してないんですけど…</span> / <span class="jp">ちょっと高いんですけど…</span> 끝까지 말하지 않는 것이 일본어에서는 예의입니다.'}
+];
+
+const CONJS = [
+ {label:'그리고 — 덧붙이기', items:[
+  C('あと','아토','그리고 (하나 더)','회화에서 가장 많이 쓰는 「그리고」. <b>주문할 때</b> 「그리고 또」로 딱 맞습니다.',
+    'ビールを一つ、あと、水もください。','ビールをひとつ、あと、みずもください','비-루오 히토츠, 아토, 미즈모 쿠다사이','맥주 하나, 그리고 물도 주세요.',true),
+  C('それから','소레카라','그러고 나서','<b>순서</b>가 있을 때. 「그 다음에」에 가깝습니다.',
+    'ラーメンを食べて、それからカフェに行きます。','ラーメンをたべて、それからカフェにいきます','라-멘오 타베테, 소레카라 카훼니 이키마스','라멘 먹고, 그 다음에 카페에 갈 거예요.'),
+  C('そして','소시테','그리고','조금 격식 있는 느낌. 글에서 더 자주 보이고, 회화에서는 <span class="jp">あと · それから</span>를 씁니다.',
+    '京都に行きました。そして、奈良にも行きました。','きょうとにいきました。そして、ならにもいきました','쿄-토니 이키마시타. 소시테, 나라니모 이키마시타','교토에 갔어요. 그리고 나라에도 갔어요.'),
+  C('それに','소레니','게다가','이유를 <b>보태서 강조</b>할 때. 칭찬을 겹칠 때 좋습니다.',
+    'この店は安いです。それに、おいしいです。','このみせはやすいです。それに、おいしいです','코노 미세와 야스이데스. 소레니, 오이시이데스','이 가게는 싸요. 게다가 맛있어요.')
+ ]},
+ {label:'그런데 · 하지만 — 뒤집기', items:[
+  C('でも','데모','하지만 · 그래도','<b>1순위.</b> 회화의 역접은 でも 하나로 거의 다 됩니다. 반드시 <b>문장 맨 앞</b>에.',
+    '高いです。でも、買います。','たかいです。でも、かいます','타카이데스. 데모, 카이마스','비싸요. 그래도 살게요.',true),
+  C('〜けど','케도','~인데요…','<b>문장 끝에 붙이는</b> 역접. 말끝을 흐려 부드럽게 만듭니다. 부탁·거절할 때 최고의 무기입니다.',
+    '予約してないんですけど、大丈夫ですか。','よやくしてないんですけど、だいじょうぶですか','요야쿠 시테나인데스케도, 다이죠-부데스카','예약 안 했는데요, 괜찮을까요?',true),
+  C('〜が','가','~입니다만','<span class="jp">けど</span>의 정중한 버전. 호텔·가게에서 직원에게 말할 때 씁니다.',
+    'すみませんが、これは何ですか。','すみませんが、これはなんですか','스미마셍가, 코레와 난데스카','죄송한데요, 이건 뭔가요?'),
+  C('ところで','토코로데','그런데 (화제 전환)','한국어 「그런데」의 <b>다른 쪽</b>. 앞말을 뒤집는 게 아니라 <b>화제를 바꿀 때만</b> 씁니다.',
+    'ところで、お仕事は何ですか。','ところで、おしごとはなんですか','토코로데, 오시고토와 난데스카','그런데, 무슨 일 하세요?',true),
+  C('しかし','시카시','그러나','문어체. 뉴스와 글에서 봅니다. <b>말할 때 쓰면 딱딱합니다</b> — 읽을 줄만 알면 됩니다.',
+    '雨でした。しかし、行きました。','あめでした。しかし、いきました','아메데시타. 시카시, 이키마시타','비가 왔습니다. 그러나 갔습니다.')
+ ]},
+ {label:'그래서 · 그러니까 — 이어가기', items:[
+  C('じゃあ','쟈-','그럼','<b>결정을 내리는 순간</b>의 한 마디. 메뉴를 고르고 「그럼 이걸로」.',
+    'じゃあ、これにします。','じゃあ、これにします','쟈-, 코레니 시마스','그럼, 이걸로 할게요.',true),
+  C('それで','소레데','그래서','앞의 일 때문에 벌어진 결과. <b>맞장구로도</b> 씁니다 — <span class="jp">それで？</span>(그래서요?)',
+    '道に迷いました。それで、遅くなりました。','みちにまよいました。それで、おそくなりました','미치니 마요이마시타. 소레데, 오소쿠 나리마시타','길을 잃었어요. 그래서 늦었어요.'),
+  C('だから','다카라','그러니까','이유 → 결론. 조금 <b>강하게</b> 들릴 수 있으니 윗사람에게는 조심.',
+    '明日帰ります。だから、今日買います。','あしたかえります。だから、きょうかいます','아시타 카에리마스. 다카라, 쿄- 카이마스','내일 돌아가요. 그러니까 오늘 살게요.'),
+  C('〜ので','노데','~라서','<b>문장 안에서</b> 이유를 붙입니다. <span class="jp">から</span>보다 부드러워 부탁·변명에 좋습니다.',
+    '韓国人なので、日本語が下手です。','かんこくじんなので、にほんごがへたです','캉코쿠진나노데, 니홍고가 헤타데스','한국인이라서 일본어가 서툴러요.')
+ ]},
+ {label:'정리 · 되짚기', items:[
+  C('とりあえず','토리아에즈','일단','<b>이자카야 첫 주문의 정석.</b> 고민을 미루고 일단 시작할 때.',
+    'とりあえず、ビールをお願いします。','とりあえず、ビールをおねがいします','토리아에즈, 비-루오 오네가이시마스','일단 맥주 주세요.',true),
+  C('やっぱり','얍파리','역시 · 아무래도','<b>마음을 바꿀 때</b>도 씁니다. 「역시 이걸로 할래요」.',
+    'やっぱり、こっちにします。','やっぱり、こっちにします','얍파리, 콧치니 시마스','역시 이걸로 할게요.'),
+  C('つまり','츠마리','그러니까 즉','상대 말을 <b>내가 이해한 대로 되짚을 때</b>. 잘못 알아들었는지 확인하는 데 유용합니다.',
+    'つまり、ここは休みですか。','つまり、ここはやすみですか','츠마리, 코코와 야스미데스카','그러니까, 여기 쉬는 날인가요?'),
+  C('例えば','타토에바','예를 들면','추천을 받았는데 감이 안 올 때. <span class="jp">例えば？</span> 한 마디면 상대가 구체적으로 말해줍니다.',
+    '例えば、どんな料理ですか。','たとえば、どんなりょうりですか','타토에바, 돈나 료-리데스카','예를 들면 어떤 요리예요?')
+ ]},
+ {label:'말이 막혔을 때 — 시간 벌기', items:[
+  C('えーと','에-토','음…','다음 말을 고르는 사이에 넣습니다. <b>침묵보다 훨씬 낫습니다</b> — 대화가 끊기지 않습니다.',
+    'えーと、駅はどこですか。','','에-토, 에키와 도코데스카','음… 역이 어디예요?',true),
+  C('あのう','아노-','저기요…','말을 걸 때. <span class="jp">すみません</span>보다 부드럽고 조심스럽습니다.',
+    'あのう、これ、いくらですか。','','아노-, 코레, 이쿠라데스카','저기요, 이거 얼마예요?'),
+  C('なんか','난카','뭐랄까','딱 맞는 말이 안 나올 때. 남발하면 가벼워 보이니 <b>한 번씩만</b>.',
+    'なんか、面白いですね。','なんか、おもしろいですね','난카, 오모시로이데스네','뭐랄까, 재밌네요.'),
+  C('ちょっと','촛토','좀…','<b>거절의 완곡 표현.</b> <span class="jp">ちょっと…</span>에서 말을 멈추면 그 자체로 「곤란해요」라는 뜻입니다.',
+    'すみません、それはちょっと…。','','스미마셍, 소레와 촛토…','죄송한데, 그건 좀….',true)
+ ]}
+];
+
+$('#crules').innerHTML = CRULES.map(r=>
+  `<div class="vrule"><div class="t"><i>${r.n}</i>${r.t}</div><p>${r.p}</p></div>`).join('');
+
+$('#conjList').innerHTML = CONJS.map(sec=>{
+  const cards = sec.items.map(c=>{
+    const rd = c.ek
+      ? `<span class="er"><span class="kn">${c.ek}</span><span class="sl">·</span>${c.ep}</span>`
+      : `<span class="er">${c.ep}</span>`;
+    return `<div class="conj${c.star?' star':''}">
+      <div class="chead"><span class="cw">${c.w}</span><span class="cp">${c.p}</span></div>
+      <div class="cm">${c.m}</div>
+      <div class="cn">${c.n}</div>
+      <div class="vex"><span class="ej">${c.ej}</span>${rd}<span class="ek">${c.em}</span></div>
+    </div>`;
+  }).join('');
+  return `<div class="rowlabel">${sec.label}</div><div class="conjs">${cards}</div>`;
+}).join('');
 
 /* ─────────── 퀴즈 ─────────── */
 const POOLS = [
